@@ -23,21 +23,20 @@ public class EntidadBancariaServiceImpl implements EntidadBancariaService {
     public EntidadBancaria get(int id) {
         return entidadBancariaDAO.get(id);
     }
-    
-    
+
     @Override
     public EntidadBancaria insert(EntidadBancaria entidadBancaria) throws BusinessException {
 
         List<BusinessMessage> businessMessages = new ArrayList<>();
-        
+
         Validador validador = new Validador();
         int validado = validador.checkNif(entidadBancaria.cif);
-        
+
         if (validado == 0 || validado < 0) {
             BusinessMessage businessMessage = new BusinessMessage("CIF: ", "El formato es erróneo.");
             businessMessages.add(businessMessage);
         }
-       
+
         if (businessMessages.size() > 0) {
             throw new BusinessException(businessMessages);
         }
@@ -58,8 +57,8 @@ public class EntidadBancariaServiceImpl implements EntidadBancariaService {
 
         Validador validador = new Validador();
         int validado = validador.checkNif(entidadBancaria.cif);
-        
-        if (validado == 0 || validado < 0 ) {
+
+        if (validado == 0 || validado < 0) {
             BusinessMessage businessMessage = new BusinessMessage("CIF: ", "El formato es erróneo.");
             businessMessages.add(businessMessage);
         }

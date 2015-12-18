@@ -3,7 +3,6 @@ package com.fpmislata.banco.persistence.dao.implementacion.hibernate;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.persistence.dao.GenericDAO;
 import java.lang.reflect.ParameterizedType;
-import java.sql.SQLException;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
