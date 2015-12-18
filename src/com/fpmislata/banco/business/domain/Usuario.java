@@ -4,25 +4,41 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
  * @author alumno
  */
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
 
     private int idUsuario;
+    
+    @NotBlank
+    @Size(min = 2, max = 40)
     private String nombre;
+    
+    @Email
     private String email;
+    
     private String password;
-    @Column(name="rol")
+    
+    @Column(name = "rol")
     @Enumerated(EnumType.STRING)
     private Rol rol;
+    
+    
+    @Size(min = 2, max = 20)
+    @Pattern(regexp="^[_A-Za-z0-9-\\+]+$")
     private String nick;
 
-    public Usuario(){
+    public Usuario() {
     }
-    
+
+       
     public Usuario(String nick, String password) {
         this.nick = nick;
         this.password = password;
@@ -51,7 +67,7 @@ public class Usuario implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public Rol getRol() {
         return rol;
     }

@@ -33,17 +33,12 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
         session.beginTransaction();
 
         try {
-            
             session.save(t);
-            
-        } catch (org.hibernate.exception.ConstraintViolationException ex) {
 
-            SQLException sqlException = ex.getSQLException();
-            if (sqlException.getErrorCode() == 1062 && sqlException.getSQLState().equals("23000")) {
-                throw new BusinessException("valorDuplicado: ", "El valor está duplicado");
-            } else {
-                throw new RuntimeException(ex);
-            }
+        } catch (org.hibernate.exception.ConstraintViolationException ex) {
+            throw new BusinessException(ex);
+        } catch (javax.validation.ConstraintViolationException cve) {
+            throw new BusinessException(cve);
         }
 
         session.getTransaction().commit();
@@ -55,9 +50,15 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
     public T update(T t) throws BusinessException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-
-        session.update(t);
-
+        
+        try {
+            session.update(t);
+        } catch (org.hibernate.exception.ConstraintViolationException ex) {
+            throw new BusinessException(ex);
+        } catch (javax.validation.ConstraintViolationException cve) {
+            throw new BusinessException(cve);
+        }
+        
         session.getTransaction().commit();
         session.close();
         return t;
@@ -87,7 +88,6 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        
         Query query = session.createQuery("SELECT e FROM " + getEntityClass().getName() + " e");
         List<T> tes = query.list();
 

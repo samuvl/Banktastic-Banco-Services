@@ -29,26 +29,6 @@ public class EntidadBancariaServiceImpl implements EntidadBancariaService {
     public EntidadBancaria insert(EntidadBancaria entidadBancaria) throws BusinessException {
 
         List<BusinessMessage> businessMessages = new ArrayList<>();
-
-        if (entidadBancaria.codigoEntidad.equals("0")) {
-            BusinessMessage businessMessage = new BusinessMessage("codigoEntidad: ", "No puede ser 0..");
-            businessMessages.add(businessMessage);
-        }
-
-        if ((entidadBancaria.nombre == null) || (entidadBancaria.nombre.trim().isEmpty())) {
-            BusinessMessage businessMessage = new BusinessMessage("Nombre: ", "El campo está vacio.");
-            businessMessages.add(businessMessage);
-        }
-
-        if (entidadBancaria.fechaCreacion == null)  {
-            BusinessMessage businessMessage = new BusinessMessage("Fecha: ", "El campo está vacio.");
-            businessMessages.add(businessMessage);
-        }
-        
-        if ((entidadBancaria.direccion == null) || (entidadBancaria.direccion.trim().isEmpty())) {
-            BusinessMessage businessMessage = new BusinessMessage("Dirección: ", "El campo está vacio.");
-            businessMessages.add(businessMessage);
-        }
         
         Validador validador = new Validador();
         int validado = validador.checkNif(entidadBancaria.cif);
@@ -76,25 +56,6 @@ public class EntidadBancariaServiceImpl implements EntidadBancariaService {
     public EntidadBancaria update(EntidadBancaria entidadBancaria) throws BusinessException {
         List<BusinessMessage> businessMessages = new ArrayList<>();
 
-        if (entidadBancaria.codigoEntidad.equals("0")) {
-            BusinessMessage businessMessage = new BusinessMessage("codigoEntidad: ", "No puede ser 0.");
-            businessMessages.add(businessMessage);
-        }
-
-        if ((entidadBancaria.nombre == null) || (entidadBancaria.nombre.trim().isEmpty())) {
-            BusinessMessage businessMessage = new BusinessMessage("Nombre: ", "El campo está vacio.");
-            businessMessages.add(businessMessage);
-        }
-
-        if (entidadBancaria.fechaCreacion == null)  {
-            BusinessMessage businessMessage = new BusinessMessage("Fecha: ", "El campo está vacio.");
-            businessMessages.add(businessMessage);
-        }
-        
-        if ((entidadBancaria.direccion == null) || (entidadBancaria.direccion.trim().isEmpty())) {
-            BusinessMessage businessMessage = new BusinessMessage("Dirección: ", "El campo está vacio.");
-            businessMessages.add(businessMessage);
-        }
         Validador validador = new Validador();
         int validado = validador.checkNif(entidadBancaria.cif);
         
