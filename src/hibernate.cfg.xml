@@ -8,13 +8,16 @@
     <property name="connection.password">banco</property>
     -->
     
-    <property name="connection.datasource">java:/comp/env/jdbc/MySQLDS</property>
-    <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+    <property name="connection.datasource">java:comp/env/jdbc/MySQLDS</property>
+    <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
     
     <property name="hibernate.show_sql">true</property>
     
     <mapping resource="com/fpmislata/banco/persistence/dao/implementacion/hibernate/hbm/EntidadBancaria.hbm.xml"/>
+    <mapping class="com.fpmislata.banco.business.domain.EntidadBancaria"/>
+        
     <mapping resource="com/fpmislata/banco/persistence/dao/implementacion/hibernate/hbm/Usuario.hbm.xml"/>
+    <mapping class="com.fpmislata.banco.business.domain.Usuario"/>
 
   </session-factory>
 </hibernate-configuration>
