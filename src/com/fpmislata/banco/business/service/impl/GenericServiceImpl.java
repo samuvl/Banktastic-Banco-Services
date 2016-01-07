@@ -1,42 +1,44 @@
-
-
 package com.fpmislata.banco.business.service.impl;
 
 import com.fpmislata.banco.business.service.GenericService;
 import com.fpmislata.banco.core.BusinessException;
+import com.fpmislata.banco.persistence.dao.GenericDAO;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
+public class GenericServiceImpl<S> implements GenericService<S> {
 
-public class GenericServiceImpl<T> implements GenericService<T>{
-    
-    private Class<T> getEntityClass() {
-        return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    @Autowired
+    GenericDAO<S> genericDAO;
+
+    private Class<S> getEntityClass() {
+        return (Class<S>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
     @Override
-    public T get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public S get(int id) {
+        return genericDAO.get(id);
     }
 
     @Override
-    public T insert(T s) throws BusinessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public S insert(S s) throws BusinessException {
+        return genericDAO.insert(s);
     }
 
     @Override
-    public T update(T s) throws BusinessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public S update(S s) throws BusinessException {
+        return genericDAO.update(s);
     }
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return genericDAO.delete(id);
     }
 
     @Override
-    public List<T> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<S> findAll() {
+        return genericDAO.findAll();
     }
 
 }

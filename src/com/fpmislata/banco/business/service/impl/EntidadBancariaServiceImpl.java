@@ -14,17 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author Samuel Lao
  */
-public class EntidadBancariaServiceImpl implements EntidadBancariaService {
+public class EntidadBancariaServiceImpl extends GenericServiceImpl<EntidadBancaria> implements EntidadBancariaService {
 
     @Autowired
     EntidadBancariaDAO entidadBancariaDAO;
-
-    @Override
-    public EntidadBancaria get(int id) {
-        return entidadBancariaDAO.get(id);
-    }
-    
-    
+ 
     @Override
     public EntidadBancaria insert(EntidadBancaria entidadBancaria) throws BusinessException {
 
@@ -69,17 +63,6 @@ public class EntidadBancariaServiceImpl implements EntidadBancariaService {
         }
 
         return entidadBancariaDAO.update(entidadBancaria);
-    }
-
-    @Override
-    public boolean delete(int id) {
-        return entidadBancariaDAO.delete(id);
-    }
-
-    @Override
-    public List<EntidadBancaria> findAll() {
-        List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
-        return entidadesBancarias;
     }
 
     @Override

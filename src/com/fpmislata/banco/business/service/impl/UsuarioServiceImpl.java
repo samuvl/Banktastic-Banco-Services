@@ -12,40 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author samu_
  */
-public class UsuarioServiceImpl implements UsuarioService {
+public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements UsuarioService {
 
     @Autowired
     UsuarioDAO usuarioDAO;
 
     @Autowired
     PasswordManager passwordManager;
-
-    @Override
-    public Usuario get(int id) {
-        return usuarioDAO.get(id);
-    }
-
-    @Override
-    public Usuario insert(Usuario usuario) throws BusinessException {
-
-        return usuarioDAO.insert(usuario);
-    }
-
-    @Override
-    public Usuario update(Usuario usuario) throws BusinessException {
-
-        return usuarioDAO.update(usuario);
-    }
-
-    @Override
-    public boolean delete(int id) {
-        return usuarioDAO.delete(id);
-    }
-
-    @Override
-    public List<Usuario> findAll() {
-        return usuarioDAO.findAll();
-    }
 
     @Override
     public List<Usuario> findByNombre(String nombre) {
