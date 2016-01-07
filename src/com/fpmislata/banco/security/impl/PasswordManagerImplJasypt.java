@@ -27,6 +27,8 @@ public class PasswordManagerImplJasypt implements PasswordManager {
     @Override
     public boolean checkComplexity(String password) {
         boolean passed;
+        password = "";
+        
         Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,20}$");
         Matcher matcher = pattern.matcher(password);
 
@@ -37,17 +39,15 @@ public class PasswordManagerImplJasypt implements PasswordManager {
         }
         return passed;
     }
-
-
-    public static void main(String[] args) throws BusinessException {
-        PasswordManagerImplJasypt passwordManagerImplJasypt = new PasswordManagerImplJasypt();
-        
-      
-        System.out.println(passwordManagerImplJasypt.encrypt("a"));
-        System.out.println(passwordManagerImplJasypt.check("a", "NdRS0GeFxhEa6VTYC7IDp4zMNTGzCY49"));
-        
-        System.out.println("-----------------complejidad---------------------");
-        System.out.println(passwordManagerImplJasypt.checkComplexity("abc7ABC"));
-
-    }
+//
+//    public static void main(String[] args) throws BusinessException {
+//        PasswordManagerImplJasypt passwordManagerImplJasypt = new PasswordManagerImplJasypt();
+//
+//        System.out.println(passwordManagerImplJasypt.encrypt("a"));
+//        System.out.println(passwordManagerImplJasypt.check("a", "NdRS0GeFxhEa6VTYC7IDp4zMNTGzCY49"));
+//
+//        System.out.println("-----------------complejidad---------------------");
+//        System.out.println(passwordManagerImplJasypt.checkComplexity("abc7ABC"));
+//
+//    }
 }

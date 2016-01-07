@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class EntidadBancaria implements Serializable {
 
     public int idEntidadBancaria;
+    
     @NotBlank
     @Size(min = 2, max = 40)
     public String nombre;
