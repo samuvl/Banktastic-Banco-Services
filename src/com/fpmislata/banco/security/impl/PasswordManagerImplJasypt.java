@@ -27,8 +27,10 @@ public class PasswordManagerImplJasypt implements PasswordManager {
     @Override
     public boolean checkComplexity(String password) {
         boolean passed;
-        password = "";
-        
+        if (password == null) {
+            password = "";
+        }
+
         Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,20}$");
         Matcher matcher = pattern.matcher(password);
 
