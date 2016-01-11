@@ -21,6 +21,8 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario> im
         Query query = session.createQuery("SELECT usuario FROM Usuario usuario WHERE nombre=?");
         query.setString(0, nombre);
         List<Usuario> usuarios = query.list();
+        
+        session.close();
 
         return usuarios;
     }
@@ -44,7 +46,8 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario> im
             usuario = usuarios.get(0);
         }
         
+        session.close();
+        
         return usuario;
-
     }
 }

@@ -17,6 +17,7 @@ public class EntidadBancariaDAOImplHibernate extends GenericDAOImplHibernate<Ent
         query.setString(0, nombre);
         List<EntidadBancaria> entidadesBancarias = query.list();
 
+        session.close();
         return entidadesBancarias;
     }
 }
