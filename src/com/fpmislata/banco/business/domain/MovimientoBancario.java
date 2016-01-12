@@ -1,6 +1,7 @@
 package com.fpmislata.banco.business.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,7 +26,7 @@ public class MovimientoBancario implements Serializable {
     private String concepto;
     
     @NotNull
-    private int cantidad;
+    private BigDecimal cantidad;
 
     private Date fechaMovimiento;
 
@@ -33,11 +34,19 @@ public class MovimientoBancario implements Serializable {
         
     }
     
-    public MovimientoBancario(String tipoMovimiento, int idCuentaBancaria, String concepto, int cantidad, Date fechaMovimiento) {
+    public MovimientoBancario(String tipoMovimiento, int idCuentaBancaria, String concepto, BigDecimal cantidad, Date fechaMovimiento) {
         this.tipoMovimiento = tipoMovimiento;
         this.idCuentaBancaria = idCuentaBancaria;
         this.concepto = concepto;
         this.cantidad = cantidad;
+        this.fechaMovimiento = fechaMovimiento;
+    }
+
+    public Date getFechaMovimiento() {
+        return fechaMovimiento;
+    }
+
+    public void setFechaMovimiento(Date fechaMovimiento) {
         this.fechaMovimiento = fechaMovimiento;
     }
 
@@ -73,11 +82,11 @@ public class MovimientoBancario implements Serializable {
         this.concepto = concepto;
     }
 
-    public int getCantidad() {
+    public BigDecimal getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(BigDecimal cantidad) {
         this.cantidad = cantidad;
     }
 

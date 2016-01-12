@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.fpmislata.banco.dominio.MovimientoBancario" table="movimientobancario" >
+    <class name="com.fpmislata.banco.business.domain.MovimientoBancario" table="movimientobancario" >
         <id name="idMovimientoBancario" column="idMovimientoBancario" type="integer">
             <generator class="identity"/>
         </id>
         <property name="tipoMovimiento"  />
-        <property name="idCuentaBancaria"/>
+        <property name="idCuentaBancaria" />
         <property name="concepto" />
         <property name="cantidad" />
         <property name="fechaMovimiento" type="date"/>

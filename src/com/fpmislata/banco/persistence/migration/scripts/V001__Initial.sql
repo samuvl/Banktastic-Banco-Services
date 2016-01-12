@@ -34,19 +34,24 @@ CREATE TABLE IF NOT EXISTS `cuentabancaria` (
 	`nombreTitular` VARCHAR(50) NULL DEFAULT NULL,
         `nCuenta` INT(16) NULL DEFAULT NULL,
 	`tipoCuenta` VARCHAR(40) NULL DEFAULT NULL,
-        `saldoCuenta` INT(16) NULL DEFAULT NULL,
-	PRIMARY KEY (`idCuenta`)
+        `idSucursalBancaria` VARCHAR(40) NULL DEFAULT NULL,
+        `saldoCuenta` DECIMAL(15,2) NULL DEFAULT NULL,
+	PRIMARY KEY (`idCuentaBancaria`)
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
+INSERT INTO `cuentabancaria` (`nombreTitular`, `nCuenta`, `tipoCuenta`, `idSucursalBancaria`,`saldoCuenta`) VALUES ('Samuel Lao', 12345, 'corriente', '1', 1566);
+INSERT INTO `cuentabancaria` (`nombreTitular`, `nCuenta`, `tipoCuenta`, `idSucursalBancaria`,`saldoCuenta`) VALUES ('Daniel ', 00001111, 'Corriente', '2', 2533.22);
+INSERT INTO `cuentabancaria` (`nombreTitular`, `nCuenta`, `tipoCuenta`, `idSucursalBancaria`,`saldoCuenta`) VALUES ('Adrian ', 45564, 'Corriente','3', 7533.22);
 
 CREATE TABLE IF NOT EXISTS `movimientobancario` (
 	`idMovimientoBancario` INT(11) NOT NULL AUTO_INCREMENT,
 	`tipoMovimiento` VARCHAR(50) NULL DEFAULT NULL,
         `idCuentaBancaria` INT(11) NULL DEFAULT NULL,
 	`concepto` VARCHAR(40) NULL DEFAULT NULL,
-        `cantidad` INT(16) NULL DEFAULT NULL,
+        `cantidad` DECIMAL(15,2) NULL DEFAULT NULL,
 	`fechaMovimiento` DATE NULL DEFAULT NULL,
 	PRIMARY KEY (`idMovimientoBancario`)
 )

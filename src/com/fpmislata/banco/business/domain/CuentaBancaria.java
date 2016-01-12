@@ -2,6 +2,7 @@ package com.fpmislata.banco.business.domain;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.validation.constraints.Size;
 
 /**
@@ -24,18 +25,25 @@ public class CuentaBancaria implements Serializable {
     private int idSucursalBancaria;
 
     @NotNull
-    private int saldoCuenta;
+    private BigDecimal saldoCuenta;
 
     public CuentaBancaria() {
 
     }
 
-    public CuentaBancaria(String nombreTitular, int nCuenta, String tipoCuenta, int idSucursalBancaria, int saldoCuenta) {
+    public CuentaBancaria(String nombreTitular, int nCuenta, String tipoCuenta, BigDecimal saldoCuenta) {
         this.nombreTitular = nombreTitular;
         this.nCuenta = nCuenta;
         this.tipoCuenta = tipoCuenta;
         this.saldoCuenta = saldoCuenta;
-        this.idSucursalBancaria = idSucursalBancaria;
+    }
+
+    public int getIdCuentaBancaria() {
+        return idCuentaBancaria;
+    }
+
+    public void setIdCuentaBancaria(int idCuentaBancaria) {
+        this.idCuentaBancaria = idCuentaBancaria;
     }
 
     public String getNombreTitular() {
@@ -78,11 +86,11 @@ public class CuentaBancaria implements Serializable {
         this.idSucursalBancaria = idSucursalBancaria;
     }
 
-    public int getSaldoCuenta() {
+    public BigDecimal getSaldoCuenta() {
         return saldoCuenta;
     }
 
-    public void setSaldoCuenta(int saldoCuenta) {
+    public void setSaldoCuenta(BigDecimal saldoCuenta) {
         this.saldoCuenta = saldoCuenta;
     }
 
