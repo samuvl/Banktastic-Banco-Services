@@ -8,7 +8,8 @@ import java.util.List;
  *
  * @author Lliurex
  */
-public interface MovimientoBancarioDAO extends GenericDAO<MovimientoBancario>{
-        List<MovimientoBancario> getByIdCuenta(int idCuentaBancaria) throws BusinessException;
+public interface MovimientoBancarioDAO extends GenericDAO<MovimientoBancario> {
+
+    List<MovimientoBancario> getByIdCuenta(int idCuentaBancaria) throws BusinessException;
 
 }

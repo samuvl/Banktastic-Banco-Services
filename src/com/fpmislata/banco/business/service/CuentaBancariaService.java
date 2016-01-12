@@ -1,16 +1,11 @@
-package com.fpmislata.banco.persistence.dao;
+package com.fpmislata.banco.business.service;
 
 import com.fpmislata.banco.business.domain.CuentaBancaria;
-import com.fpmislata.banco.business.service.GenericService;
 import com.fpmislata.banco.core.BusinessException;
 import java.util.List;
 
-/**
- *
- * @author Lliurex
- */
-public interface CuentaBancariaDAO extends GenericService<CuentaBancaria>{
-    
+public interface CuentaBancariaService {
+
     List<CuentaBancaria> getBySucursal(int idSucursalBancaria) throws BusinessException;
 
 }
