@@ -3,6 +3,9 @@ package com.fpmislata.banco.business.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,35 +14,47 @@ import javax.validation.constraints.Size;
  * @author Lliurex
  */
 public class MovimientoBancario implements Serializable {
-    
+    /*
+idMovimiento - fechayHora movimiento - concepto - importe - saldo (CALCULADO) - tipoMovimiento (ENUM)
+*/
     private int idMovimientoBancario;
+
+    @Column(name = "tipoMovimiento")
+    @Enumerated(EnumType.STRING)
+    private RolMovimiento tipoMovimiento;
     
     @NotNull
-    @Size(min = 2, max = 50)
-    private String tipoMovimiento;
-    
-    @NotNull
-    private int idCuentaBancaria;
+    private CuentaBancaria cuentaBancaria;
     
     @NotNull
     @Size(min = 2, max = 50)
     private String concepto;
     
     @NotNull
-    private BigDecimal cantidad;
+    private BigDecimal importe;
 
+    @NotNull
+    private BigDecimal saldo;
+        
     private Date fechaMovimiento;
 
     public MovimientoBancario (){
         
     }
     
-    public MovimientoBancario(String tipoMovimiento, int idCuentaBancaria, String concepto, BigDecimal cantidad, Date fechaMovimiento) {
-        this.tipoMovimiento = tipoMovimiento;
-        this.idCuentaBancaria = idCuentaBancaria;
+    public MovimientoBancario(CuentaBancaria cuentaBancaria, String concepto, BigDecimal importe, Date fechaMovimiento) {
+        this.cuentaBancaria = cuentaBancaria;
         this.concepto = concepto;
-        this.cantidad = cantidad;
+        this.importe = importe;
         this.fechaMovimiento = fechaMovimiento;
+    }
+
+    public RolMovimiento getTipoMovimiento() {
+        return tipoMovimiento;
+    }
+
+    public void setTipoMovimiento(RolMovimiento tipoMovimiento) {
+        this.tipoMovimiento = tipoMovimiento;
     }
 
     public Date getFechaMovimiento() {
@@ -58,20 +73,12 @@ public class MovimientoBancario implements Serializable {
         this.idMovimientoBancario = idMovimientoBancario;
     }
 
-    public String getTipoMovimiento() {
-        return tipoMovimiento;
+    public CuentaBancaria getCuentaBancaria() {
+        return cuentaBancaria;
     }
 
-    public void setTipoMovimiento(String tipoMovimiento) {
-        this.tipoMovimiento = tipoMovimiento;
-    }
-
-    public int getIdCuentaBancaria() {
-        return idCuentaBancaria;
-    }
-
-    public void setIdCuentaBancaria(int idCuentaBancaria) {
-        this.idCuentaBancaria = idCuentaBancaria;
+    public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
     }
 
     public String getConcepto() {
@@ -82,13 +89,22 @@ public class MovimientoBancario implements Serializable {
         this.concepto = concepto;
     }
 
-    public BigDecimal getCantidad() {
-        return cantidad;
+    public BigDecimal getImporte() {
+        return importe;
     }
 
-    public void setCantidad(BigDecimal cantidad) {
-        this.cantidad = cantidad;
+    public void setImporte(BigDecimal importe) {
+        this.importe = importe;
     }
+
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
+
 
     public Date getFecha() {
         return fechaMovimiento;

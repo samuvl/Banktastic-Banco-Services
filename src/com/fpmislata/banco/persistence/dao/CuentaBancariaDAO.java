@@ -10,7 +10,7 @@ import java.util.List;
  * @author Lliurex
  */
 public interface CuentaBancariaDAO extends GenericService<CuentaBancaria>{
-    
-    List<CuentaBancaria> getBySucursal(int idSucursalBancaria) throws BusinessException;
-
+    /*
+    List<CuentaBancaria> getBySucursal(SucursalBancaria sucursalBancaria) throws BusinessException;
+*/
 }

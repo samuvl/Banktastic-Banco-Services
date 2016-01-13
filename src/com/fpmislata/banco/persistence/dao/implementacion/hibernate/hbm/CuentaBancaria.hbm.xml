@@ -3,12 +3,17 @@
 <hibernate-mapping>
     <class name="com.fpmislata.banco.business.domain.CuentaBancaria" table="cuentabancaria" >
         <id name="idCuentaBancaria" column="idCuentaBancaria" type="integer">
-            <generator class="identity"/>
+            <generator class="identity"/><!--Autonumérico-->
         </id>
         <property name="nombreTitular"/>
         <property name="nCuenta" />
-        <property name="tipoCuenta" />
-        <property name="idSucursalBancaria" />
-        <property name="saldoCuenta"/>
+        <!--en sucursal lo mismo pero con Entidadbancaria
+        <many-to-one name="sucursalBancaria">
+            <column name="idSucursalBancaria" />
+        </many-to-one>-->
+        <many-to-one name="usuario">
+            <column name="idUsuario" />
+        </many-to-one>
+        <property name="saldo"/>
     </class>
 </hibernate-mapping>

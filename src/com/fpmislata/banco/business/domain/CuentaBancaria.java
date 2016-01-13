@@ -3,7 +3,6 @@ package com.fpmislata.banco.business.domain;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -12,30 +11,30 @@ import javax.validation.constraints.Size;
 public class CuentaBancaria implements Serializable {
 
     private int idCuentaBancaria;
+    
     @NotNull
-
     private String nombreTitular;
+    
     @NotNull
     private int nCuenta;
-
-    @Size(min = 2, max = 50)
-    private String tipoCuenta;
-
+    
+    private Usuario usuario;
+    
+    /*@NotNull
+    private SucursalBancaria sucursalBancaria;
+*/
     @NotNull
-    private int idSucursalBancaria;
-
-    @NotNull
-    private BigDecimal saldoCuenta;
+    private BigDecimal saldo;
 
     public CuentaBancaria() {
 
     }
 
-    public CuentaBancaria(String nombreTitular, int nCuenta, String tipoCuenta, BigDecimal saldoCuenta) {
+    public CuentaBancaria(String nombreTitular, int nCuenta, Usuario usuario, BigDecimal saldo) {
         this.nombreTitular = nombreTitular;
         this.nCuenta = nCuenta;
-        this.tipoCuenta = tipoCuenta;
-        this.saldoCuenta = saldoCuenta;
+        this.usuario = usuario;
+        this.saldo = saldo;
     }
 
     public int getIdCuentaBancaria() {
@@ -62,36 +61,20 @@ public class CuentaBancaria implements Serializable {
         this.nCuenta = nCuenta;
     }
 
-    public int getIdCuenta() {
-        return idCuentaBancaria;
+    public BigDecimal getSaldo() {
+        return saldo;
     }
 
-    public void setIdCuenta(int idCuentaBancaria) {
-        this.idCuentaBancaria = idCuentaBancaria;
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
     }
 
-    public String getTipoCuenta() {
-        return tipoCuenta;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setTipoCuenta(String tipoCuenta) {
-        this.tipoCuenta = tipoCuenta;
-    }
-
-    public int getIdSucursalBancaria() {
-        return idSucursalBancaria;
-    }
-
-    public void setIdSucursalBancaria(int idSucursalBancaria) {
-        this.idSucursalBancaria = idSucursalBancaria;
-    }
-
-    public BigDecimal getSaldoCuenta() {
-        return saldoCuenta;
-    }
-
-    public void setSaldoCuenta(BigDecimal saldoCuenta) {
-        this.saldoCuenta = saldoCuenta;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

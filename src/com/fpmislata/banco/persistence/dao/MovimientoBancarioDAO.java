@@ -1,5 +1,6 @@
 package com.fpmislata.banco.persistence.dao;
 
+import com.fpmislata.banco.business.domain.CuentaBancaria;
 import com.fpmislata.banco.business.domain.MovimientoBancario;
 import com.fpmislata.banco.core.BusinessException;
 import java.util.List;
@@ -10,6 +11,6 @@ import java.util.List;
  */
 public interface MovimientoBancarioDAO extends GenericDAO<MovimientoBancario> {
 
-    List<MovimientoBancario> getByIdCuenta(int idCuentaBancaria) throws BusinessException;
+    List<MovimientoBancario> getByIdCuenta(CuentaBancaria cuentaBancaria) throws BusinessException;
 
 }

@@ -5,10 +5,22 @@
         <id name="idMovimientoBancario" column="idMovimientoBancario" type="integer">
             <generator class="identity"/>
         </id>
-        <property name="tipoMovimiento"  />
-        <property name="idCuentaBancaria" />
+        <property name="tipoMovimiento" >
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.fpmislata.banco.business.domain.RolMovimiento</param>
+                <param name="type">12</param>
+            </type>
+        </property>        
+        <many-to-one name="cuentaBancaria">
+            <column name="idCuentaBancaria" />
+        </many-to-one>
         <property name="concepto" />
-        <property name="cantidad" />
+        <property name="importe" />
+        <property name="saldo" />
         <property name="fechaMovimiento" type="date"/>
     </class>
 </hibernate-mapping>
+
+<!--
+idMovimiento - fechayHora movimiento - concepto - importe - saldo (CALCULADO) - tipoMovimiento (ENUM)
+-->

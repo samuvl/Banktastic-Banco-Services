@@ -6,7 +6,7 @@ import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.persistence.dao.CuentaBancariaDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-
+/*
 public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria> implements CuentaBancariaService {
 
     @Autowired
@@ -17,4 +17,4 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
         return cuentaBancariaDAO.getBySucursal(idSucursalBancaria);
     }
 
-}
+}*/

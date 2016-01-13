@@ -1,5 +1,6 @@
 package com.fpmislata.banco.persistence.dao.implementacion.hibernate;
 
+import com.fpmislata.banco.business.domain.CuentaBancaria;
 import com.fpmislata.banco.business.domain.MovimientoBancario;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.persistence.dao.MovimientoBancarioDAO;
@@ -14,12 +15,12 @@ import org.hibernate.Session;
 public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<MovimientoBancario> implements MovimientoBancarioDAO {
 
     @Override
-    public List<MovimientoBancario> getByIdCuenta(int idCuentaBancaria) throws BusinessException {
+    public List<MovimientoBancario> getByIdCuenta(CuentaBancaria cuentaBancaria) throws BusinessException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        Query query = session.createQuery("SELECT movimientobancario FROM MovimientoBancario movimientobancario WHERE idCuentaBancaria=?");
-        query.setInteger(0, idCuentaBancaria);
+        Query query = session.createQuery("SELECT movimientobancario FROM MovimientoBancario movimientobancario WHERE cuentaBancaria=?");
+        query.setInteger(0, cuentaBancaria.getIdCuentaBancaria());
         
         List<MovimientoBancario> movimientosBancarios = query.list();
 

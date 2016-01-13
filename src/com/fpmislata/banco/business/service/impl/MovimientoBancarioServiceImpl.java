@@ -1,5 +1,6 @@
 package com.fpmislata.banco.business.service.impl;
 
+import com.fpmislata.banco.business.domain.CuentaBancaria;
 import com.fpmislata.banco.business.domain.MovimientoBancario;
 import com.fpmislata.banco.business.service.MovimientoBancarioService;
 import com.fpmislata.banco.core.BusinessException;
@@ -13,8 +14,8 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
     MovimientoBancarioDAO movimientoBancarioDAO;
 
     @Override
-    public List<MovimientoBancario> getByIdCuenta(int idCuentaBancaria) throws BusinessException {
-        return movimientoBancarioDAO.getByIdCuenta(idCuentaBancaria);
+    public List<MovimientoBancario> getByIdCuenta(CuentaBancaria cuentaBancaria) throws BusinessException {
+        return movimientoBancarioDAO.getByIdCuenta(cuentaBancaria);
     }
 
 }
