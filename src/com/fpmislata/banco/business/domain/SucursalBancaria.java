@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author Lliurex
  */
-@JsonIgnoreProperties({ "entidadBancaria" })
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class SucursalBancaria implements Serializable{//falta añadir las anotaciones para que hibernate lo pille
     private int IdSucursalBancaria;

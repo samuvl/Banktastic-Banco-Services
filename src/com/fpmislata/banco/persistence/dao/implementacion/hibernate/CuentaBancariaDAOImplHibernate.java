@@ -18,13 +18,13 @@ public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<Cuen
     public List<CuentaBancaria> getBySucursal(SucursalBancaria sucursalBancaria) throws BusinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        
+
         Query query = session.createQuery("SELECT cuentabancaria FROM CuentaBancaria cuentabancaria WHERE sucursalBancaria=?");
         query.setInteger(0, sucursalBancaria.getIdSucursalBancaria());
         List<CuentaBancaria> cuentasBancarias = query.list();
-        
+
         session.close();
         return cuentasBancarias;
     }
-   
-} 
+
+}

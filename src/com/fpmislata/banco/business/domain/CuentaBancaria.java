@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Column;
 
 /**
  *
  * @author Lliurex
  */
-@JsonIgnoreProperties({ "usuario" })
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CuentaBancaria implements Serializable {
 
     private int idCuentaBancaria;
@@ -18,11 +19,12 @@ public class CuentaBancaria implements Serializable {
     private String nombreTitular;
     
     @NotNull
+    @Column(length=16)
     private int nCuenta;
     
     private Usuario usuario;
     
-    @NotNull
+    
     private SucursalBancaria sucursalBancaria;
 
     @NotNull

@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
  *
  * @author Lliurex
  */
-@JsonIgnoreProperties({ "cuentaBancaria" })
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class MovimientoBancario implements Serializable {
     /*

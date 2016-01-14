@@ -1,5 +1,6 @@
 package com.fpmislata.banco.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -13,6 +14,7 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  * @author alumno
  */
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class Usuario implements Serializable {
 
