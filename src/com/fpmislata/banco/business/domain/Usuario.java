@@ -13,6 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  * @author alumno
  */
+
 public class Usuario implements Serializable {
 
     private int idUsuario;

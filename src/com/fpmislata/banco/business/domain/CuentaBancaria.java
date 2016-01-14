@@ -1,5 +1,6 @@
 package com.fpmislata.banco.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
  *
  * @author Lliurex
  */
+@JsonIgnoreProperties({ "usuario" })
 public class CuentaBancaria implements Serializable {
 
     private int idCuentaBancaria;
@@ -20,9 +22,9 @@ public class CuentaBancaria implements Serializable {
     
     private Usuario usuario;
     
-    /*@NotNull
+    @NotNull
     private SucursalBancaria sucursalBancaria;
-*/
+
     @NotNull
     private BigDecimal saldo;
 

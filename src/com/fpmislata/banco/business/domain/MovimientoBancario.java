@@ -1,5 +1,6 @@
 package com.fpmislata.banco.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,6 +14,8 @@ import javax.validation.constraints.Size;
  *
  * @author Lliurex
  */
+@JsonIgnoreProperties({ "cuentaBancaria" })
+
 public class MovimientoBancario implements Serializable {
     /*
 idMovimiento - fechayHora movimiento - concepto - importe - saldo (CALCULADO) - tipoMovimiento (ENUM)

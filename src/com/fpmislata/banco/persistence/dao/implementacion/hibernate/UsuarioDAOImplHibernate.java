@@ -15,39 +15,36 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario> im
 
     @Override
     public List<Usuario> findByNombre(String nombre) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         Query query = session.createQuery("SELECT usuario FROM Usuario usuario WHERE nombre=?");
         query.setString(0, nombre);
         List<Usuario> usuarios = query.list();
-        
-        session.close();
+
 
         return usuarios;
     }
 
     @Override
-    public Usuario getByNick(String nick) throws BusinessException{
-        
+    public Usuario getByNick(String nick) throws BusinessException {
+
         Usuario usuario = null;
-        
-        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         Query query = session.createQuery("SELECT usuario FROM Usuario usuario WHERE nick=?");
-        query.setString(0, nick);  
-       
+        query.setString(0, nick);
+
         List<Usuario> usuarios = query.list();
-        
-        if(usuarios.isEmpty() || usuarios==null){
+
+        if (usuarios.isEmpty() || usuarios == null) {
             throw new BusinessException("nick: ", "No existe");
-        }else{
+        } else {
             usuario = usuarios.get(0);
         }
-        
-        session.close();
-        
+
         return usuario;
     }
 }

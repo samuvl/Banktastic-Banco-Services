@@ -16,16 +16,15 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
 
     @Override
     public List<MovimientoBancario> getByIdCuenta(CuentaBancaria cuentaBancaria) throws BusinessException {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         Query query = session.createQuery("SELECT movimientobancario FROM MovimientoBancario movimientobancario WHERE cuentaBancaria=?");
         query.setInteger(0, cuentaBancaria.getIdCuentaBancaria());
-        
+
         List<MovimientoBancario> movimientosBancarios = query.list();
 
-        session.close();
         return movimientosBancarios;
     }
-    
+
 }
