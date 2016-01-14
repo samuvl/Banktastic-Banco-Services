@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -18,13 +19,16 @@ public class CuentaBancaria implements Serializable {
     @NotNull
     private String nombreTitular;
     
-    @NotNull
-    @Column(length=16)
+    //@NotNull
+    //@Column(length=16)
     private int nCuenta;
     
+    @ManyToOne
+    @JoinColumn(name="idUsuario")
     private Usuario usuario;
     
-    
+    @ManyToOne
+    @JoinColumn(name="idSucursalBancaria")
     private SucursalBancaria sucursalBancaria;
 
     @NotNull
@@ -34,10 +38,9 @@ public class CuentaBancaria implements Serializable {
 
     }
 
-    public CuentaBancaria(String nombreTitular, int nCuenta, Usuario usuario, BigDecimal saldo) {
+    public CuentaBancaria(String nombreTitular, int nCuenta, BigDecimal saldo) {
         this.nombreTitular = nombreTitular;
         this.nCuenta = nCuenta;
-        this.usuario = usuario;
         this.saldo = saldo;
     }
 

@@ -15,7 +15,6 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author alumno
  */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
 public class Usuario implements Serializable {
 
     private int idUsuario;

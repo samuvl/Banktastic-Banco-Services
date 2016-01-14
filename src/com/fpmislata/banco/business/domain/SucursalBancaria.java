@@ -7,15 +7,21 @@ package com.fpmislata.banco.business.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 /**
  *
  * @author Lliurex
  */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
 public class SucursalBancaria implements Serializable{//falta añadir las anotaciones para que hibernate lo pille
+   
     private int IdSucursalBancaria;
+    
+    @ManyToOne
+    @JoinColumn(name="idEntidadBancaria")
     private EntidadBancaria entidadBancaria;
 
     public SucursalBancaria() {

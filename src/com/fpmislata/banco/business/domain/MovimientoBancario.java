@@ -7,6 +7,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,7 +17,6 @@ import javax.validation.constraints.Size;
  * @author Lliurex
  */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
 public class MovimientoBancario implements Serializable {
     /*
 idMovimiento - fechayHora movimiento - concepto - importe - saldo (CALCULADO) - tipoMovimiento (ENUM)
@@ -26,7 +27,8 @@ idMovimiento - fechayHora movimiento - concepto - importe - saldo (CALCULADO) - 
     @Enumerated(EnumType.STRING)
     private RolMovimiento tipoMovimiento;
     
-    @NotNull
+    @ManyToOne
+    @JoinColumn(name="idCuentaBancaria")
     private CuentaBancaria cuentaBancaria;
     
     @NotNull
