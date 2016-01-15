@@ -16,7 +16,6 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
     @Override
     public T get(int id) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
         session.beginTransaction();
 
         T t = (T) session.get(getEntityClass(), id);
@@ -29,9 +28,9 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
     @Override
     public T insert(T t) throws BusinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-
+        
         try {
+            session.beginTransaction();
             session.save(t);
             session.getTransaction().commit();
         } catch (org.hibernate.exception.ConstraintViolationException ex) {
@@ -46,9 +45,9 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
     @Override
     public T update(T t) throws BusinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
 
         try {
+            session.beginTransaction();
             session.update(t);
             session.getTransaction().commit();
         } catch (org.hibernate.exception.ConstraintViolationException ex) {
@@ -64,18 +63,18 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
     public boolean delete(int id) {
         boolean devolver;
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
+
         T t = this.get(id);
 
         if (t != null) {
-            devolver = true;
+            session.beginTransaction();
             session.delete(t);
+            session.getTransaction().commit();
+            devolver = true;
         } else {
             devolver = false;
         }
-
-        session.getTransaction().commit();
-
+        
         return devolver;
     }
 
@@ -86,7 +85,7 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
 
         Query query = session.createQuery("SELECT e FROM " + getEntityClass().getName() + " e");
         List<T> tes = query.list();
-        
+
         session.getTransaction().commit();
         return tes;
     }

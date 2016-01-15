@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import java.util.Date;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -15,10 +15,14 @@ import javax.persistence.ManyToOne;
 public class CuentaBancaria implements Serializable {
 
     private int idCuentaBancaria;
-
-    //@NotNull
-    //@Column(length=16)
-    private int nCuenta;
+    
+//Cambiar a 16 para presentar:
+    @Size(min = 2, max = 16)
+    private String numeroCuenta;
+    
+    @Size(min = 2, max = 2)
+    private String digitoControl;
+    
     
     private Usuario usuario;
     
@@ -27,13 +31,17 @@ public class CuentaBancaria implements Serializable {
     @NotNull
     private BigDecimal saldo;
 
+    private Date fechaCreacion;
+    
+  
     public CuentaBancaria() {
-
     }
 
-    public CuentaBancaria(int nCuenta, BigDecimal saldo) {
-        this.nCuenta = nCuenta;
+    public CuentaBancaria(String numeroCuenta, Usuario usuario, BigDecimal saldo, Date fechaCreacion) {
+        this.numeroCuenta = numeroCuenta;
+        this.usuario = usuario;
         this.saldo = saldo;
+        this.fechaCreacion = fechaCreacion;
     }
 
     public int getIdCuentaBancaria() {
@@ -44,12 +52,12 @@ public class CuentaBancaria implements Serializable {
         this.idCuentaBancaria = idCuentaBancaria;
     }
 
-    public int getnCuenta() {
-        return nCuenta;
+    public String getnumeroCuenta() {
+        return numeroCuenta;
     }
 
-    public void setnCuenta(int nCuenta) {
-        this.nCuenta = nCuenta;
+    public void setnumeroCuenta(String numeroCuenta) {
+        this.numeroCuenta = numeroCuenta;
     }
 
     public BigDecimal getSaldo() {

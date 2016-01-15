@@ -15,11 +15,10 @@ public class HibernateUtil {
         Configuration configuration = new Configuration();
         configuration.configure();
         configuration.setProperty("hibernate.current_session_context_class", "thread");
+        
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         
-        Session session=sessionFactory.openSession();
-        session.close();
     }
 
     public static void openSessionAndBindToThread() {
