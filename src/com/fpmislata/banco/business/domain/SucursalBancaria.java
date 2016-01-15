@@ -20,8 +20,6 @@ public class SucursalBancaria implements Serializable{//falta añadir las anotac
    
     private int IdSucursalBancaria;
     
-    @ManyToOne
-    @JoinColumn(name="idEntidadBancaria")
     private EntidadBancaria entidadBancaria;
 
     public SucursalBancaria() {

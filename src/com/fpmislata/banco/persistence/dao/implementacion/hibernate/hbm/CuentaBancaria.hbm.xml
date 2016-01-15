@@ -5,7 +5,6 @@
         <id name="idCuentaBancaria" column="idCuentaBancaria" type="integer"><!--clave-->
             <generator class="identity"/><!--Autonumérico-->
         </id>
-        <property name="nombreTitular"/>
         <property name="nCuenta" />
         <!--en sucursal lo mismo pero con Entidadbancaria
         <many-to-one name="sucursalBancaria">

@@ -15,20 +15,13 @@ import javax.persistence.ManyToOne;
 public class CuentaBancaria implements Serializable {
 
     private int idCuentaBancaria;
-    
-    @NotNull
-    private String nombreTitular;
-    
+
     //@NotNull
     //@Column(length=16)
     private int nCuenta;
     
-    @ManyToOne
-    @JoinColumn(name="idUsuario")
     private Usuario usuario;
     
-    @ManyToOne
-    @JoinColumn(name="idSucursalBancaria")
     private SucursalBancaria sucursalBancaria;
 
     @NotNull
@@ -38,8 +31,7 @@ public class CuentaBancaria implements Serializable {
 
     }
 
-    public CuentaBancaria(String nombreTitular, int nCuenta, BigDecimal saldo) {
-        this.nombreTitular = nombreTitular;
+    public CuentaBancaria(int nCuenta, BigDecimal saldo) {
         this.nCuenta = nCuenta;
         this.saldo = saldo;
     }
@@ -50,14 +42,6 @@ public class CuentaBancaria implements Serializable {
 
     public void setIdCuentaBancaria(int idCuentaBancaria) {
         this.idCuentaBancaria = idCuentaBancaria;
-    }
-
-    public String getNombreTitular() {
-        return nombreTitular;
-    }
-
-    public void setNombreTitular(String nombre) {
-        this.nombreTitular = nombre;
     }
 
     public int getnCuenta() {

@@ -28,8 +28,6 @@ public class Usuario implements Serializable {
     
     private String password;
     
-    @Column(name = "rol")
-    @Enumerated(EnumType.STRING)
     private Rol rol;
     
     
