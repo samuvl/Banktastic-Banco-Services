@@ -28,6 +28,37 @@ INSERT INTO `usuario` (`idUsuario`, `nombre`, `encryptedPassword`, `rol`, `nick`
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `encryptedPassword`, `rol`, `nick`) VALUES (3, 'a', 'JVaiKkedo4saW1Jw9IEuCxdBzKc6UFxm', 'trabajador', 'a');
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `encryptedPassword`, `rol`, `nick`) VALUES (1, 'trabajador', 'fDTIfF8f4BnVkzkcvNdyINBmIXbRRxsJ', 'trabajador', 'trabajador');
 
-INSERT INTO `entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`, `cif`) VALUES('bankia', 'bank1', "2015-12-20", 'c/ fernando septimo 34', 'C7459058I');
-INSERT INTO `entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`, `cif`) VALUES('deustchbank', 'd345L', "2015-12-15", 'C/ Bahnstrausse', 'C4378752B');
-INSERT INTO `entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`, `cif`) VALUES('evrobank', '0893', "2014-03-11", 'c/ falsa 35', 'G8488757I');
+
+CREATE TABLE IF NOT EXISTS `cuentabancaria` (
+	`idCuentaBancaria` INT(11) NOT NULL AUTO_INCREMENT,
+	`nombreTitular` VARCHAR(50) NULL DEFAULT NULL,
+        `nCuenta` INT(16) NULL DEFAULT NULL,
+        /*`sucursalBancaria` INT(11) NULL DEFAULT NULL,*/
+        `usuario` INT(11) NULL DEFAULT NULL,
+        `saldo` DECIMAL(15,2) NULL DEFAULT NULL,
+	PRIMARY KEY (`idCuentaBancaria`),
+        FOREIGN KEY (usuario) REFERENCES usuario(idUsuario)
+        /*FOREIGN KEY (sucursalBancaria) REFERENCES sucursalbancaria(idSucursalBancaria)*/
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+INSERT INTO `cuentabancaria` (`nombreTitular`, `nCuenta`, `usuario`,`saldo`) VALUES ('Samuel Lao', 12345, 3, 1566);
+INSERT INTO `cuentabancaria` (`nombreTitular`, `nCuenta`, `usuario`,`saldo`) VALUES ('Daniel ', 00001111, 2, 2533.22);
+INSERT INTO `cuentabancaria` (`nombreTitular`, `nCuenta`, `usuario`,`saldo`) VALUES ('Adrian ', 45564, 1, 7533.22);
+
+CREATE TABLE IF NOT EXISTS `movimientobancario` (
+	`idMovimientoBancario` INT(11) NOT NULL AUTO_INCREMENT,
+	`tipoMovimiento` ENUM('debe', 'haber') NULL DEFAULT NULL,
+        `cuentaBancaria` INT(11) NULL DEFAULT NULL,
+	`concepto` VARCHAR(40) NULL DEFAULT NULL,
+        `importe` DECIMAL(15,2) NULL DEFAULT NULL,
+        `saldo` DECIMAL(15,2) NULL DEFAULT NULL,
+	`fechaMovimiento` DATE NULL DEFAULT NULL,
+	PRIMARY KEY (`idMovimientoBancario`),
+        FOREIGN KEY (cuentaBancaria) REFERENCES cuentabancaria(idCuentaBancaria)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;

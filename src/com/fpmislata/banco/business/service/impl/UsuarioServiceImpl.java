@@ -17,9 +17,6 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements U
     @Autowired
     UsuarioDAO usuarioDAO;
 
-    @Autowired
-    PasswordManager passwordManager;
-
     @Override
     public List<Usuario> findByNombre(String nombre) {
         return usuarioDAO.findByNombre(nombre);

@@ -11,4 +11,7 @@
     
     <bean class="com.fpmislata.banco.business.service.impl.EntidadBancariaServiceImpl" />
     <bean class="com.fpmislata.banco.business.service.impl.UsuarioServiceImpl" />
+    <bean class="com.fpmislata.banco.business.service.impl.CuentaBancariaServiceImpl" />
+    <bean class="com.fpmislata.banco.business.service.impl.MovimientoBancarioServiceImpl" />
+    
 </beans> 

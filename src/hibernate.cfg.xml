@@ -13,11 +13,13 @@
     
     <property name="hibernate.show_sql">true</property>
     
+
     <mapping resource="com/fpmislata/banco/persistence/dao/implementacion/hibernate/hbm/EntidadBancaria.hbm.xml"/>
     <!--<mapping class="com.fpmislata.banco.business.domain.EntidadBancaria"/>-->
-        
     <mapping resource="com/fpmislata/banco/persistence/dao/implementacion/hibernate/hbm/Usuario.hbm.xml"/>
     <!--<mapping class="com.fpmislata.banco.business.domain.Usuario"/>-->
+    <mapping resource="com/fpmislata/banco/persistence/dao/implementacion/hibernate/hbm/CuentaBancaria.hbm.xml"/>
+    <mapping resource="com/fpmislata/banco/persistence/dao/implementacion/hibernate/hbm/MovimientoBancario.hbm.xml"/>
 
   </session-factory>
 </hibernate-configuration>

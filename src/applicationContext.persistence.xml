@@ -14,4 +14,5 @@
     <bean class="com.fpmislata.banco.security.impl.PasswordManagerImplJasypt" />
     <bean class="com.fpmislata.banco.security.impl.AuthorizationImplDummy" />
     <!--<bean class="com.fpmislata.banco.security.impl.CheckManagerImpl" />-->
+    
 </beans>

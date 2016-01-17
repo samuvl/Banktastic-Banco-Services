@@ -12,7 +12,8 @@
 <!--<bean class="com.fpmislata.banco.persistence.dao.implementacion.jdbc.EntidadBancariaDAOImplJDBC" />-->
     <bean class="com.fpmislata.banco.persistence.dao.implementacion.hibernate.EntidadBancariaDAOImplHibernate" />
     <bean class="com.fpmislata.banco.persistence.dao.implementacion.hibernate.UsuarioDAOImplHibernate" />
-    
+    <bean class="com.fpmislata.banco.persistence.dao.implementacion.hibernate.CuentaBancariaDAOImplHibernate" />
+    <bean class="com.fpmislata.banco.persistence.dao.implementacion.hibernate.MovimientoBancarioDAOImplHibernate" />
     
       
 </beans> 

@@ -8,6 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
-public enum Rol {
-    cliente, trabajador;
+public enum RolMovimiento {
+    debe, haber;
 }
