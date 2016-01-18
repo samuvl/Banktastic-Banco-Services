@@ -23,12 +23,8 @@ idMovimiento - fechayHora movimiento - concepto - importe - saldo (CALCULADO) - 
 */
     private int idMovimientoBancario;
 
-    @Column(name = "tipoMovimiento")
-    @Enumerated(EnumType.STRING)
     private RolMovimiento tipoMovimiento;
     
-    @ManyToOne
-    @JoinColumn(name="idCuentaBancaria")
     private CuentaBancaria cuentaBancaria;
     
     @NotNull
