@@ -16,6 +16,7 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
     @Override
     public T get(int id) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
         session.beginTransaction();
 
         T t = (T) session.get(getEntityClass(), id);
