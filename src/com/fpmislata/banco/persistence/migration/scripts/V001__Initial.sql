@@ -11,6 +11,10 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
+INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`) VALUES ('santander', 'stn12', '2010-05-06', 'c/ botin 17');
+INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`) VALUES ('evobank', 'svob23', '2011-07-08', 'c/ morales 34');
+
+
 CREATE TABLE IF NOT EXISTS `usuario` (
 	`idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
 	`nombre` VARCHAR(50) NULL DEFAULT NULL,
@@ -63,3 +67,7 @@ CREATE TABLE IF NOT EXISTS `movimientobancario` (
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
+INSERT INTO `banco`.`movimientobancario` (`tipoMovimiento`, `idCuentaBancaria`, `concepto`, `importe`) VALUES ('debe', '1', 'humbleBundle', '10.00');
+INSERT INTO `banco`.`movimientobancario` (`tipoMovimiento`, `idCuentaBancaria`, `concepto`, `importe`) VALUES ('haber', '1', 'empresa', '234.00');
+
