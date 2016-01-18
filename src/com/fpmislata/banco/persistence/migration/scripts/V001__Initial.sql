@@ -11,8 +11,8 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
-INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`) VALUES ('santander', 'stn12', '2010-05-06', 'c/ botin 17');
-INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`) VALUES ('evobank', 'svob23', '2011-07-08', 'c/ morales 34');
+INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`) VALUES ('santander', '0001', '2010-05-06', 'c/ botin 17');
+INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`) VALUES ('evobank', '0002', '2011-07-08', 'c/ morales 34');
 
 CREATE TABLE IF NOT EXISTS `sucursalbancaria` (
 	`idSucursalBancaria` INT(11) NOT NULL AUTO_INCREMENT,
@@ -27,6 +27,10 @@ CREATE TABLE IF NOT EXISTS `sucursalbancaria` (
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
+INSERT INTO `banco`.`sucursalbancaria` (`codigoSucursalBancaria`, `direccion`, `telefono`, `idEntidadBancaria`, `fechaCreacion`) VALUES ('1111', 'C/ Tu Sucursal', '968881144', '1','2010-05-06');
+INSERT INTO `banco`.`sucursalbancaria` (`codigoSucursalBancaria`, `direccion`, `telefono`, `idEntidadBancaria`, `fechaCreacion`) VALUES ('2222', 'C/ Transformerica', '965552244', '2','2013-05-06');
+
 
 CREATE TABLE IF NOT EXISTS `usuario` (
 	`idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
@@ -62,9 +66,9 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
-INSERT INTO `cuentabancaria` ( `numeroCuenta`, `idUsuario`,`saldo`, `fechaCreacion`) VALUES ("12345", 3, 1566, '2016-01-10');
-INSERT INTO `cuentabancaria` ( `numeroCuenta`, `idUsuario`,`saldo`, `fechaCreacion`) VALUES ("00001111", 2, 2533.22, '2015-01-10');
-INSERT INTO `cuentabancaria` ( `numeroCuenta`, `idUsuario`,`saldo`, `fechaCreacion`) VALUES ("45564", 1, 7533.22, '2014-01-10');
+INSERT INTO `cuentabancaria` ( `numeroCuenta`, `idUsuario`,`saldo`, `fechaCreacion`) VALUES ("1234567891", 3, 1566, '2016-01-10');
+INSERT INTO `cuentabancaria` ( `numeroCuenta`, `idUsuario`,`saldo`, `fechaCreacion`) VALUES ("0000111122", 2, 2533.22, '2015-01-10');
+INSERT INTO `cuentabancaria` ( `numeroCuenta`, `idUsuario`,`saldo`, `fechaCreacion`) VALUES ("7777222255", 1, 7533.22, '2014-01-10');
 
 CREATE TABLE IF NOT EXISTS `movimientobancario` (
 	`idMovimientoBancario` INT(11) NOT NULL AUTO_INCREMENT,

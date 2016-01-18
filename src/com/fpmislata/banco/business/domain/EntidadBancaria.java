@@ -20,7 +20,7 @@ public class EntidadBancaria implements Serializable {
     public String nombre;
 
     @NotBlank
-    @Size(min = 4, max = 5)
+    @Size(min = 4, max = 4)
     public String codigoEntidad;
 
     public Date fechaCreacion;

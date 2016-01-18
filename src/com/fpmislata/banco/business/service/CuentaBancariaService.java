@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface CuentaBancariaService extends GenericService<CuentaBancaria>{
 
-    List<CuentaBancaria> getBySucursal(int idSucursalBancaria) throws BusinessException;
-
 }

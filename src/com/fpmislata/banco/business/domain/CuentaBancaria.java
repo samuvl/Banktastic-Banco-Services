@@ -16,13 +16,11 @@ public class CuentaBancaria implements Serializable {
 
     private int idCuentaBancaria;
     
-//Cambiar a 16 para presentar:
-    @Size(min = 2, max = 16)
+    @Size(min = 10, max = 10)
     private String numeroCuenta;
     
     @Size(min = 2, max = 2)
     private String digitoControl;
-    
     
     private Usuario usuario;
     
