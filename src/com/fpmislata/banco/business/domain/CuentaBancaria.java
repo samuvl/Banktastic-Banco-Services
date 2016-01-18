@@ -52,20 +52,20 @@ public class CuentaBancaria implements Serializable {
         this.idCuentaBancaria = idCuentaBancaria;
     }
 
-    public String getnumeroCuenta() {
+    public String getNumeroCuenta() {
         return numeroCuenta;
     }
 
-    public void setnumeroCuenta(String numeroCuenta) {
+    public void setNumeroCuenta(String numeroCuenta) {
         this.numeroCuenta = numeroCuenta;
     }
 
-    public BigDecimal getSaldo() {
-        return saldo;
+    public String getDigitoControl() {
+        return digitoControl;
     }
 
-    public void setSaldo(BigDecimal saldo) {
-        this.saldo = saldo;
+    public void setDigitoControl(String digitoControl) {
+        this.digitoControl = digitoControl;
     }
 
     public Usuario getUsuario() {
@@ -76,4 +76,29 @@ public class CuentaBancaria implements Serializable {
         this.usuario = usuario;
     }
 
+    public SucursalBancaria getSucursalBancaria() {
+        return sucursalBancaria;
+    }
+
+    public void setSucursalBancaria(SucursalBancaria sucursalBancaria) {
+        this.sucursalBancaria = sucursalBancaria;
+    }
+
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+    
+    
 }

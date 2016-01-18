@@ -11,6 +11,20 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
+CREATE TABLE IF NOT EXISTS `sucursalbancaria` (
+	`idSucursalBancaria` INT(11) NOT NULL AUTO_INCREMENT,
+	`codigoSucursalBancaria` VARCHAR(4) NULL DEFAULT NULL,
+	`direccion` VARCHAR(80) NULL DEFAULT NULL UNIQUE,
+	`telefono` VARCHAR(20) NULL DEFAULT NULL,
+	`idEntidadBancaria` INT(11) NULL DEFAULT NULL,
+	`fechaCreacion` DATE NULL DEFAULT NULL,
+	PRIMARY KEY (`idSucursalBancaria`),
+        FOREIGN KEY (`idEntidadBancaria`) REFERENCES `entidadbancaria`(`idEntidadBancaria`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
 CREATE TABLE IF NOT EXISTS `usuario` (
 	`idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
 	`nombre` VARCHAR(50) NULL DEFAULT NULL,
@@ -34,20 +48,20 @@ CREATE TABLE IF NOT EXISTS `cuentabancaria` (
         `numeroCuenta` VARCHAR(16) NULL DEFAULT NULL,
         `digitoControl` VARCHAR(2) NULL DEFAULT NULL,
         `idUsuario` INT(11) NULL DEFAULT NULL,
-        /*`idSucursalBancaria` INT(11) NULL DEFAULT NULL,*/
+        `idSucursalBancaria` INT(11) NULL DEFAULT NULL,
         `saldo` DECIMAL(15,2) NULL DEFAULT NULL,
         `fechaCreacion` DATE NULL DEFAULT NULL,
 	PRIMARY KEY (`idCuentaBancaria`),
-        FOREIGN KEY (`idUsuario`) REFERENCES `usuario`(`idUsuario`) ON UPDATE CASCADE ON DELETE CASCADE
-        /*FOREIGN KEY (idSucursalBancaria) REFERENCES sucursalbancaria(idSucursalBancaria)*/
+        FOREIGN KEY (`idUsuario`) REFERENCES `usuario`(`idUsuario`) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (`idSucursalBancaria`) REFERENCES `sucursalbancaria`(`idSucursalBancaria`) ON UPDATE CASCADE ON DELETE CASCADE
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
-INSERT INTO `cuentabancaria` ( `numeroCuenta`, `idUsuario`,`saldo`) VALUES ("12345", 3, 1566);
-INSERT INTO `cuentabancaria` ( `numeroCuenta`, `idUsuario`,`saldo`) VALUES ("00001111", 2, 2533.22);
-INSERT INTO `cuentabancaria` ( `numeroCuenta`, `idUsuario`,`saldo`) VALUES ("45564", 1, 7533.22);
+INSERT INTO `cuentabancaria` ( `numeroCuenta`, `idUsuario`,`saldo`, `fechaCreacion`) VALUES ("12345", 3, 1566, '2016-01-10');
+INSERT INTO `cuentabancaria` ( `numeroCuenta`, `idUsuario`,`saldo`, `fechaCreacion`) VALUES ("00001111", 2, 2533.22, '2015-01-10');
+INSERT INTO `cuentabancaria` ( `numeroCuenta`, `idUsuario`,`saldo`, `fechaCreacion`) VALUES ("45564", 1, 7533.22, '2014-01-10');
 
 CREATE TABLE IF NOT EXISTS `movimientobancario` (
 	`idMovimientoBancario` INT(11) NOT NULL AUTO_INCREMENT,

@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.fpmislata.banco.business.domain.CuentaBancaria" table="cuentabancaria" ><!--clase a la que mapea-->
-        <id name="idCuentaBancaria" column="idCuentaBancaria" type="integer"><!--clave-->
-            <generator class="identity"/><!--Autonumérico-->
+    <class name="com.fpmislata.banco.business.domain.CuentaBancaria" table="cuentabancaria" >
+        <id name="idCuentaBancaria" column="idCuentaBancaria" type="integer">
+            <generator class="identity"/>
         </id>
         <property name="numeroCuenta" />
-        <!--en sucursal lo mismo pero con Entidadbancaria
-        <many-to-one name="sucursalBancaria">
-            <column name="idSucursalBancaria" />
-        </many-to-one>-->
+        <property name="digitoControl" />
         <many-to-one name="usuario">
             <column name="idUsuario" />
         </many-to-one>
-        
+        <many-to-one name="sucursalBancaria">
+            <column name="idSucursalBancaria" />
+        </many-to-one>
         <property name="saldo"/>
-        
+        <property name="fechaCreacion" />
     </class>
 </hibernate-mapping>

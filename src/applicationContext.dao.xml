@@ -14,5 +14,5 @@
     <bean class="com.fpmislata.banco.persistence.dao.implementacion.hibernate.UsuarioDAOImplHibernate" />
     <bean class="com.fpmislata.banco.persistence.dao.implementacion.hibernate.CuentaBancariaDAOImplHibernate" />
     <bean class="com.fpmislata.banco.persistence.dao.implementacion.hibernate.MovimientoBancarioDAOImplHibernate" />
-    
+    <bean class="com.fpmislata.banco.persistence.dao.implementacion.hibernate.SucursalBancariaDAOImplHibernate" />
 </beans> 

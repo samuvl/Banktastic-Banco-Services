@@ -1,9 +1,9 @@
+
 package com.fpmislata.banco.persistence.dao;
 
-/**
- *
- * @author alumno
- */
-public class SucursalBancariaDAO {
+import com.fpmislata.banco.business.domain.SucursalBancaria;
+
+
+public interface SucursalBancariaDAO extends GenericDAO<SucursalBancaria> {
     
 }
