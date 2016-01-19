@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `movimientobancario` (
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
-/*
-INSERT INTO `banco`.`movimientobancario` (`tipoMovimiento`, `idCuentaBancaria`, `concepto`, `importe`) VALUES ('debe', '1', 'humbleBundle', '10.00');
-INSERT INTO `banco`.`movimientobancario` (`tipoMovimiento`, `idCuentaBancaria`, `concepto`, `importe`) VALUES ('haber', '1', 'empresa', '234.00');
-*/
+
+INSERT INTO `banco`.`movimientobancario` VALUES (null, 'debe', 1, 'humbleBundle', '20', 1676, 1656, curdate());
+INSERT INTO `banco`.`movimientobancario` VALUES (null, 'haber', 1, 'empresa', '100', 1656, 1566, curdate());
+
