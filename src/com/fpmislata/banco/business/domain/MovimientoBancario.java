@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -13,16 +14,14 @@ import javax.validation.constraints.Size;
  */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class MovimientoBancario implements Serializable {
-    /*
-idMovimiento - fechayHora movimiento - concepto - importe - saldo (CALCULADO) - tipoMovimiento (ENUM)
-*/
+
     private int idMovimientoBancario;
 
     private RolMovimiento tipoMovimiento;
     
     private CuentaBancaria cuentaBancaria;
     
-    @NotNull
+    @NotBlank
     @Size(min = 2, max = 50)
     private String concepto;
     
@@ -30,7 +29,10 @@ idMovimiento - fechayHora movimiento - concepto - importe - saldo (CALCULADO) - 
     private BigDecimal importe;
 
     @NotNull
-    private BigDecimal saldo;
+    private BigDecimal saldoPosterior;
+    
+    @NotNull
+    private BigDecimal saldoAnterior;
         
     private Date fechaMovimiento;
 
@@ -93,14 +95,21 @@ idMovimiento - fechayHora movimiento - concepto - importe - saldo (CALCULADO) - 
         this.importe = importe;
     }
 
-    public BigDecimal getSaldo() {
-        return saldo;
+    public BigDecimal getSaldoPosterior() {
+        return saldoPosterior;
     }
 
-    public void setSaldo(BigDecimal saldo) {
-        this.saldo = saldo;
+    public void setSaldoPosterior(BigDecimal saldoPosterior) {
+        this.saldoPosterior = saldoPosterior;
     }
 
+    public BigDecimal getSaldoAnterior() {
+        return saldoAnterior;
+    }
+
+    public void setSaldoAnterior(BigDecimal saldoAnterior) {
+        this.saldoAnterior = saldoAnterior;
+    }
 
     public Date getFecha() {
         return fechaMovimiento;

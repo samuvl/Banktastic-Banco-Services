@@ -18,27 +18,29 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Usuario implements Serializable {
 
     private int idUsuario;
-    
+
     @NotBlank
     @Size(min = 2, max = 40)
     private String nombre;
-    
+
     @Email
     private String email;
-    
+
     private String password;
-    
+
     private Rol rol;
-    
-    
+
     @Size(min = 2, max = 20)
-    @Pattern(regexp="^[_A-Za-z0-9-\\+]+$")
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+$")
     private String nick;
+
+    @NotBlank
+    @Size(min = 9, max = 9)
+    private String dni;
 
     public Usuario() {
     }
 
-       
     public Usuario(String nick, String password) {
         this.nick = nick;
         this.password = password;
@@ -92,4 +94,13 @@ public class Usuario implements Serializable {
         this.nick = nick;
     }
 
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    
 }

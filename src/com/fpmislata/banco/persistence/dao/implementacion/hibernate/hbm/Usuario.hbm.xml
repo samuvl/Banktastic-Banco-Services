@@ -15,5 +15,6 @@
       </type>
     </property>
     <property name="nick" unique="true"/>
+    <property name="dni" />
   </class>
 </hibernate-mapping>

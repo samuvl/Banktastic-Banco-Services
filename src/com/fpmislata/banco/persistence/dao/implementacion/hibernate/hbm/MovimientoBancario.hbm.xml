@@ -16,7 +16,8 @@
         </many-to-one>
         <property name="concepto" />
         <property name="importe" />
-        <property name="saldo" />
+        <property name="saldoAnterior" />
+        <property name="saldoPosterior" />
         <property name="fechaMovimiento" type="date"/>
     </class>
 </hibernate-mapping>

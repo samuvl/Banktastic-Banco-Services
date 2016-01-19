@@ -11,8 +11,8 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
-INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`) VALUES ('santander', '0001', '2010-05-06', 'c/ botin 17');
-INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`) VALUES ('evobank', '0002', '2011-07-08', 'c/ morales 34');
+INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`, `cif`) VALUES ('santander', '0001', '2010-05-06', 'c/ botin 17', '53258450H');
+INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`, `cif`) VALUES ('evobank', '0002', '2011-07-08', 'c/ morales 34', '53258450H');
 
 CREATE TABLE IF NOT EXISTS `sucursalbancaria` (
 	`idSucursalBancaria` INT(11) NOT NULL AUTO_INCREMENT,
@@ -39,15 +39,16 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 	`encryptedPassword` VARCHAR(80) NULL DEFAULT NULL,
 	`rol` ENUM('trabajador','cliente') NULL DEFAULT NULL,
 	`nick` VARCHAR(50)  NULL DEFAULT NULL UNIQUE,
+        `dni` VARCHAR(9) NULL DEFAULT NULL,
 	PRIMARY KEY (`idUsuario`)
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
-INSERT INTO `usuario` (`idUsuario`, `nombre`, `encryptedPassword`, `rol`, `nick`) VALUES (2, 'cliente', 'oFQrspbsJhva3+HgRI4lXFw+Hv2hHcmT', 'cliente', 'cliente');
-INSERT INTO `usuario` (`idUsuario`, `nombre`, `encryptedPassword`, `rol`, `nick`) VALUES (3, 'a', 'JVaiKkedo4saW1Jw9IEuCxdBzKc6UFxm', 'trabajador', 'a');
-INSERT INTO `usuario` (`idUsuario`, `nombre`, `encryptedPassword`, `rol`, `nick`) VALUES (1, 'trabajador', 'fDTIfF8f4BnVkzkcvNdyINBmIXbRRxsJ', 'trabajador', 'trabajador');
+INSERT INTO `usuario` (`idUsuario`, `nombre`, `encryptedPassword`, `rol`, `nick`, `dni`) VALUES (2, 'cliente', 'oFQrspbsJhva3+HgRI4lXFw+Hv2hHcmT', 'cliente', 'cliente', '33333333P');
+INSERT INTO `usuario` (`idUsuario`, `nombre`, `encryptedPassword`, `rol`, `nick`, `dni`) VALUES (3, 'a', 'JVaiKkedo4saW1Jw9IEuCxdBzKc6UFxm', 'trabajador', 'a', '22222222J');
+INSERT INTO `usuario` (`idUsuario`, `nombre`, `encryptedPassword`, `rol`, `nick`, `dni`) VALUES (1, 'trabajador', 'fDTIfF8f4BnVkzkcvNdyINBmIXbRRxsJ', 'trabajador', 'trabajador', '11111111H');
 
 
 CREATE TABLE IF NOT EXISTS `cuentabancaria` (
@@ -76,7 +77,8 @@ CREATE TABLE IF NOT EXISTS `movimientobancario` (
         `idCuentaBancaria` INT(11) NULL DEFAULT NULL,
 	`concepto` VARCHAR(40) NULL DEFAULT NULL,
         `importe` DECIMAL(15,2) NULL DEFAULT NULL,
-        `saldo` DECIMAL(15,2) NULL DEFAULT NULL,
+        `saldoAnterior` DECIMAL(15,2) NULL DEFAULT NULL,
+        `saldoPosterior` DECIMAL(15,2) NULL DEFAULT NULL,
 	`fechaMovimiento` DATE NULL DEFAULT NULL,
 	PRIMARY KEY (`idMovimientoBancario`),
         FOREIGN KEY (`idCuentaBancaria`) REFERENCES `cuentabancaria`(`idCuentaBancaria`) ON UPDATE CASCADE ON DELETE CASCADE
