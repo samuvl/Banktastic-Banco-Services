@@ -9,4 +9,5 @@ public interface CuentaBancariaService extends GenericService<CuentaBancaria> {
     List<CuentaBancaria> getBySucursal(int idSucursalBancaria) throws BusinessException;
     List<CuentaBancaria> getByDni(String dni) throws BusinessException;
 
+    List<CuentaBancaria> getByUsuario(int idUsuario) throws BusinessException;
 }
