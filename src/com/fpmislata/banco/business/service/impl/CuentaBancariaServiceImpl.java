@@ -50,4 +50,9 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
     public List<CuentaBancaria> getBySucursal(int idSucursalBancaria) throws BusinessException {
         return cuentaBancariaDAO.getBySucursal(idSucursalBancaria);
     }
+
+    @Override
+    public List<CuentaBancaria> getByDni(String dni) throws BusinessException {
+        return cuentaBancariaDAO.getByDni(dni);
+    }
 }
