@@ -5,4 +5,5 @@ import com.fpmislata.banco.persistence.dao.SucursalBancariaDAO;
 
 public class SucursalBancariaDAOImplHibernate extends GenericDAOImplHibernate<SucursalBancaria> implements SucursalBancariaDAO {
     
+
 }
