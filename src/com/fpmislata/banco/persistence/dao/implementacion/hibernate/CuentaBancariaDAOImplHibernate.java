@@ -14,7 +14,7 @@ import org.hibernate.Session;
 public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<CuentaBancaria> implements CuentaBancariaDAO {
 
     @Override
-    public List<CuentaBancaria> getBySucursal(int idSucursalBancaria) throws BusinessException {
+    public List<CuentaBancaria> findBySucursal(int idSucursalBancaria) throws BusinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -22,19 +22,22 @@ public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<Cuen
         query.setInteger(0, idSucursalBancaria);
         List<CuentaBancaria> cuentasBancarias = query.list();
 
+        session.getTransaction().commit();
         return cuentasBancarias;
     }
 
     @Override
-    public List<CuentaBancaria> getByUsuario(int idUsuario) throws BusinessException {
+    public List<CuentaBancaria> findByUsuario(int idUsuario) throws BusinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         Query query = session.createQuery("SELECT cuentabancaria FROM CuentaBancaria cuentabancaria WHERE idUsuario=?");
         query.setInteger(0, idUsuario);
-        
+
         List<CuentaBancaria> cuentasBancarias = query.list();
 
-        return cuentasBancarias;}
+        session.getTransaction().commit();
+        return cuentasBancarias;
+    }
 
 }

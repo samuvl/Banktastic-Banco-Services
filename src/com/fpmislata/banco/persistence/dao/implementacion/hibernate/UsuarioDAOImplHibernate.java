@@ -22,14 +22,13 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario> im
         query.setString(0, nombre);
         List<Usuario> usuarios = query.list();
 
-
+    session.getTransaction().commit();
         return usuarios;
     }
 
     @Override
     public Usuario getByNick(String nick) throws BusinessException {
-
-        Usuario usuario = null;
+        Usuario usuario;
 
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -43,14 +42,15 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario> im
             throw new BusinessException("nick: ", "No existe");
         } else {
             usuario = usuarios.get(0);
+            session.getTransaction().commit();
         }
-
+        
         return usuario;
     }
 
     @Override
     public Usuario getByDni(String dni) throws BusinessException {
-        Usuario usuario = null;
+        Usuario usuario;
 
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -60,12 +60,11 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario> im
 
         List<Usuario> usuarios = query.list();
         
-        System.out.println(usuarios.size());
-
-        if (usuarios.isEmpty() || usuarios == null) {
-            throw new BusinessException("dni: ", "No existe");
+        if (usuarios.isEmpty() ) {
+            throw new BusinessException("DNI", "No existe");
         } else {
             usuario = usuarios.get(0);
+            session.getTransaction().commit();
         }
 
         return usuario;

@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface CuentaBancariaDAO extends GenericDAO<CuentaBancaria> {
 
-    List<CuentaBancaria> getBySucursal(int idSucursalBancaria) throws BusinessException;
-    List<CuentaBancaria> getByUsuario(int idUsuario) throws BusinessException;
+    List<CuentaBancaria> findBySucursal(int idSucursalBancaria) throws BusinessException;
+    List<CuentaBancaria> findByUsuario(int idUsuario) throws BusinessException;
 }

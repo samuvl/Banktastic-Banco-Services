@@ -3,6 +3,7 @@ package com.fpmislata.banco.business.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -23,11 +24,14 @@ public class SucursalBancaria implements Serializable {//falta añadir las anota
     @Size(min = 3, max = 80)
     private String direccion;
 
+    @NotBlank
     @Size(min = 3, max = 20)
     private String telefono;
 
+    @NotNull
     private EntidadBancaria entidadBancaria;
 
+    @NotNull
     private Date fechaCreacion;
 
     public SucursalBancaria() {

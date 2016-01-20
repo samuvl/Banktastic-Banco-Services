@@ -2,9 +2,7 @@ package com.fpmislata.banco.business.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
@@ -24,13 +22,16 @@ public class Usuario implements Serializable {
     private String nombre;
 
     @Email
+    @NotBlank
     private String email;
 
     private String password;
-
+    
+    @NotNull
     private Rol rol;
 
     @Size(min = 2, max = 20)
+    @NotBlank
     @Pattern(regexp = "^[_A-Za-z0-9-\\+]+$")
     private String nick;
 
