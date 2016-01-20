@@ -47,4 +47,27 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario> im
 
         return usuario;
     }
+
+    @Override
+    public Usuario getByDni(String dni) throws BusinessException {
+        Usuario usuario = null;
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("SELECT usuario FROM Usuario usuario WHERE dni=?");
+        query.setString(0, dni);
+
+        List<Usuario> usuarios = query.list();
+        
+        System.out.println(usuarios.size());
+
+        if (usuarios.isEmpty() || usuarios == null) {
+            throw new BusinessException("dni: ", "No existe");
+        } else {
+            usuario = usuarios.get(0);
+        }
+
+        return usuario;
+    }
 }

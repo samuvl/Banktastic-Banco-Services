@@ -12,5 +12,6 @@ public interface UsuarioService extends GenericService<Usuario> {
 
     List<Usuario> findByNombre(String nombre);
     Usuario getByNick(String nick) throws BusinessException ;
+    Usuario getByDni(String dni) throws BusinessException ;
 
 }

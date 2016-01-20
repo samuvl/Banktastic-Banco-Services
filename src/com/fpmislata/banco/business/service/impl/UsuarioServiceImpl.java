@@ -50,4 +50,9 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements U
         return usuarioDAO.insert(usuario);
 
     }
+
+    @Override
+    public Usuario getByDni(String dni) throws BusinessException {
+        return usuarioDAO.getByDni(dni);
+    }
 }

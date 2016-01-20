@@ -11,5 +11,6 @@ import java.util.List;
 public interface UsuarioDAO extends GenericDAO<Usuario> {
 
     List<Usuario> findByNombre(String nombre);
-    Usuario getByNick(String nick) throws BusinessException ; //para comprobar nick que se introducirá en el login
+    Usuario getByNick(String nick) throws BusinessException ;
+    Usuario getByDni(String dni) throws BusinessException ;
 }
