@@ -28,20 +28,19 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
     @Override
     public T insert(T t) throws BusinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        
+
         try {
             session.beginTransaction();
             session.save(t);
             session.getTransaction().commit();
-            
-             return t;
+
+            return t;
         } catch (org.hibernate.exception.ConstraintViolationException ex) {
             throw new BusinessException(ex);
         } catch (javax.validation.ConstraintViolationException cve) {
             throw new BusinessException(cve);
         }
 
-       
     }
 
     @Override
@@ -52,33 +51,36 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
             session.beginTransaction();
             session.update(t);
             session.getTransaction().commit();
-            
-             return t;
+
+            return t;
         } catch (org.hibernate.exception.ConstraintViolationException ex) {
             throw new BusinessException(ex);
         } catch (javax.validation.ConstraintViolationException cve) {
             throw new BusinessException(cve);
         }
 
-       
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(int id) throws BusinessException{
         boolean devolver;
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        try {
+            T t = this.get(id);
 
-        T t = this.get(id);
-
-        if (t != null) {
-            session.beginTransaction();
-            session.delete(t);
-            session.getTransaction().commit();
-            devolver = true;
-        } else {
-            devolver = false;
+            if (t != null) {
+                session.beginTransaction();
+                session.delete(t);
+                session.getTransaction().commit();
+                devolver = true;
+            } else {
+                devolver = false;
+            }
+        } catch (org.hibernate.exception.ConstraintViolationException ex) {
+            throw new BusinessException(ex);
+        } catch (javax.validation.ConstraintViolationException cve) {
+            throw new BusinessException(cve);
         }
-        
         return devolver;
     }
 

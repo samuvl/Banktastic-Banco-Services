@@ -13,6 +13,6 @@ public interface GenericDAO <T> {
     T get (int id);
     T insert(T t) throws BusinessException;
     T update(T t) throws BusinessException;
-    boolean delete (int id);
+    boolean delete (int id) throws BusinessException;
     List<T> findAll();
 }

@@ -32,7 +32,7 @@ public class GenericServiceImpl<S> implements GenericService<S> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(int id) throws BusinessException{
         return genericDAO.delete(id);
     }
 

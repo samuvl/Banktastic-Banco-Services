@@ -27,7 +27,12 @@ public class BusinessException extends Exception {
         if (sqlException.getErrorCode() == 1062 && sqlException.getSQLState().equals("23000")) {
             BusinessMessage businessMessage = new BusinessMessage("valorDuplicado ", "El valor está duplicado");
             businessMessages.add(businessMessage);
-        } else {
+        
+        } else if(sqlException.getErrorCode() == 1451 || sqlException.getSQLState().equals("HY000")){
+            BusinessMessage businessMessage = new BusinessMessage("Clave Ajena ", "Imposible Borrar, existen dependencias de base de datos.");
+            businessMessages.add(businessMessage);
+        
+        } else{
             throw new RuntimeException(cve);
         }
     }
