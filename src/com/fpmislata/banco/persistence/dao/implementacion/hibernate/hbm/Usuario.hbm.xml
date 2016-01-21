@@ -14,7 +14,7 @@
         <param name="type">12</param>
       </type>
     </property>
-    <property name="nick" />
-    <property name="dni" />
+    <property name="nick" unique="true" />
+    <property name="dni" unique="true" />
   </class>
 </hibernate-mapping>
