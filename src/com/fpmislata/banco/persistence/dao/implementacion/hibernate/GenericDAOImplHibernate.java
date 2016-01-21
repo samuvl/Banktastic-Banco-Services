@@ -33,13 +33,15 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
             session.beginTransaction();
             session.save(t);
             session.getTransaction().commit();
+            
+             return t;
         } catch (org.hibernate.exception.ConstraintViolationException ex) {
             throw new BusinessException(ex);
         } catch (javax.validation.ConstraintViolationException cve) {
             throw new BusinessException(cve);
         }
 
-        return t;
+       
     }
 
     @Override
@@ -50,13 +52,15 @@ public class GenericDAOImplHibernate<T> implements GenericDAO<T> {
             session.beginTransaction();
             session.update(t);
             session.getTransaction().commit();
+            
+             return t;
         } catch (org.hibernate.exception.ConstraintViolationException ex) {
             throw new BusinessException(ex);
         } catch (javax.validation.ConstraintViolationException cve) {
             throw new BusinessException(cve);
         }
 
-        return t;
+       
     }
 
     @Override

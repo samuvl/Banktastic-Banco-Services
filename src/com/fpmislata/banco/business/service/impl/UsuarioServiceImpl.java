@@ -6,7 +6,6 @@ import com.fpmislata.banco.business.service.UsuarioService;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.core.BusinessMessage;
 import com.fpmislata.banco.persistence.dao.UsuarioDAO;
-import com.fpmislata.banco.security.PasswordManager;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,6 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements U
 
     @Override
     public Usuario insert(Usuario usuario) throws BusinessException {
-
         List<BusinessMessage> businessMessages = new ArrayList<>();
 
         Validador validador = new Validador();

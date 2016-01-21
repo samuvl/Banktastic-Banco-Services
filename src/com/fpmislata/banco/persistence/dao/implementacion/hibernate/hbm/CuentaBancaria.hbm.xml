@@ -5,7 +5,7 @@
         <id name="idCuentaBancaria" column="idCuentaBancaria" type="integer">
             <generator class="identity"/>
         </id>
-        <property name="numeroCuenta" />
+        <property name="numeroCuenta" unique="true" />
         <property name="digitoControl" />
         <many-to-one name="usuario">
             <column name="idUsuario" />

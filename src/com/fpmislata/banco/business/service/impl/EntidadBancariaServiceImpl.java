@@ -21,12 +21,10 @@ public class EntidadBancariaServiceImpl extends GenericServiceImpl<EntidadBancar
  
     @Override
     public EntidadBancaria insert(EntidadBancaria entidadBancaria) throws BusinessException {
-
         List<BusinessMessage> businessMessages = new ArrayList<>();
 
         Validador validador = new Validador();
         int validado = validador.checkNif(entidadBancaria.cif);
-
         if (validado == 0 || validado < 0) {
             BusinessMessage businessMessage = new BusinessMessage("CIF: ", "El formato es erróneo.");
             businessMessages.add(businessMessage);
@@ -52,7 +50,6 @@ public class EntidadBancariaServiceImpl extends GenericServiceImpl<EntidadBancar
 
         Validador validador = new Validador();
         int validado = validador.checkNif(entidadBancaria.cif);
-
         if (validado == 0 || validado < 0) {
             BusinessMessage businessMessage = new BusinessMessage("CIF: ", "El formato es erróneo.");
             businessMessages.add(businessMessage);

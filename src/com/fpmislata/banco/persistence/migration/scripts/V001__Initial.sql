@@ -16,7 +16,7 @@ INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion
 
 CREATE TABLE IF NOT EXISTS `sucursalbancaria` (
 	`idSucursalBancaria` INT(11) NOT NULL AUTO_INCREMENT,
-	`codigoSucursalBancaria` VARCHAR(4) NULL DEFAULT NULL,
+	`codigoSucursalBancaria` VARCHAR(4) NULL DEFAULT NULL UNIQUE,
 	`direccion` VARCHAR(80) NULL DEFAULT NULL UNIQUE,
 	`telefono` VARCHAR(20) NULL DEFAULT NULL,
 	`idEntidadBancaria` INT(11) NULL DEFAULT NULL,
@@ -38,9 +38,11 @@ CREATE TABLE IF NOT EXISTS `usuario` (
         `email` VARCHAR(50) NULL DEFAULT NULL,
 	`encryptedPassword` VARCHAR(80) NULL DEFAULT NULL,
 	`rol` ENUM('trabajador','cliente') NULL DEFAULT NULL,
-	`nick` VARCHAR(50)  NULL DEFAULT NULL UNIQUE,
+	`nick` VARCHAR(50)  NULL DEFAULT NULL ,
         `dni` VARCHAR(9) NULL DEFAULT NULL,
-	PRIMARY KEY (`idUsuario`)
+	PRIMARY KEY (`idUsuario`),
+        UNIQUE KEY `nick` (`nick`),
+        UNIQUE KEY `dni` (`dni`)
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
@@ -53,7 +55,7 @@ INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `encryptedPassword`, `rol
 
 CREATE TABLE IF NOT EXISTS `cuentabancaria` (
 	`idCuentaBancaria` INT(11) NOT NULL AUTO_INCREMENT,
-        `numeroCuenta` VARCHAR(16) NULL DEFAULT NULL,
+        `numeroCuenta` VARCHAR(16) NULL DEFAULT NULL UNIQUE,
         `digitoControl` VARCHAR(2) NULL DEFAULT NULL,
         `idUsuario` INT(11) NULL DEFAULT NULL,
         `idSucursalBancaria` INT(11) NULL DEFAULT NULL,

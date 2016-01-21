@@ -3,6 +3,8 @@ package com.fpmislata.banco.core;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import javax.validation.ConstraintViolation;
 
 /**
@@ -10,7 +12,6 @@ import javax.validation.ConstraintViolation;
  * @author alumno
  */
 public class BusinessException extends Exception {
-
     private List<BusinessMessage> businessMessages = new ArrayList<>();
 
     public BusinessException(String fieldName, String mensaje) {
@@ -18,13 +19,16 @@ public class BusinessException extends Exception {
         this.businessMessages.add(businessMessage);
     }
 
+
     public BusinessException(List<BusinessMessage> businessMessages) {
         this.businessMessages = businessMessages;
     }
 
+
     public BusinessException(org.hibernate.exception.ConstraintViolationException cve) {
         SQLException sqlException = cve.getSQLException();
         if (sqlException.getErrorCode() == 1062 && sqlException.getSQLState().equals("23000")) {
+           
             BusinessMessage businessMessage = new BusinessMessage("valorDuplicado: ", "El valor está duplicado");
         } else {
             throw new RuntimeException(cve);
@@ -52,5 +56,4 @@ public class BusinessException extends Exception {
     public void setBusinessMessages(List<BusinessMessage> businessMessages) {
         this.businessMessages = businessMessages;
     }
-
 }
