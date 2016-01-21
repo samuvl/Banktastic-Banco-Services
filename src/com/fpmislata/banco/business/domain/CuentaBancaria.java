@@ -15,30 +15,30 @@ import javax.validation.constraints.Size;
 public class CuentaBancaria implements Serializable {
 
     private int idCuentaBancaria;
-    
-    @Size(min = 10, max = 10)
+
+    @Size(min = 10, max = 10, message = "Debe tener {max} dígitos.")
     private String numeroCuenta;
-    
+
     @Size(min = 2, max = 2)
     private String digitoControl;
-    
+
+    @NotNull(message = "No puede estar vacío.")
     private Usuario usuario;
-    
+
+    @NotNull(message = "No puede estar vacío.")
     private SucursalBancaria sucursalBancaria;
 
-    @NotNull
     private BigDecimal saldo;
 
+    @NotNull(message = "No puede estar vacío.")
     private Date fechaCreacion;
-    
-  
+
     public CuentaBancaria() {
     }
 
-    public CuentaBancaria(String numeroCuenta, Usuario usuario, BigDecimal saldo, Date fechaCreacion) {
+    public CuentaBancaria(String numeroCuenta, Usuario usuario, Date fechaCreacion) {
         this.numeroCuenta = numeroCuenta;
         this.usuario = usuario;
-        this.saldo = saldo;
         this.fechaCreacion = fechaCreacion;
     }
 
@@ -97,6 +97,5 @@ public class CuentaBancaria implements Serializable {
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
-    
-    
+
 }

@@ -29,7 +29,7 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements U
     public Usuario getByNick(String nick) throws BusinessException {
         return usuarioDAO.getByNick(nick);
     }
-    
+
     @Override
     public Usuario insert(Usuario usuario) throws BusinessException {
 
@@ -48,6 +48,27 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements U
         }
 
         return usuarioDAO.insert(usuario);
+
+    }
+
+    @Override
+    public Usuario update(Usuario usuario) throws BusinessException {
+
+        List<BusinessMessage> businessMessages = new ArrayList<>();
+
+        Validador validador = new Validador();
+        int validado = validador.checkNif(usuario.getDni());
+
+        if (validado == 0 || validado < 0) {
+            BusinessMessage businessMessage = new BusinessMessage("DNI", "El formato es erróneo.");
+            businessMessages.add(businessMessage);
+        }
+
+        if (businessMessages.size() > 0) {
+            throw new BusinessException(businessMessages);
+        }
+
+        return usuarioDAO.update(usuario);
 
     }
 
