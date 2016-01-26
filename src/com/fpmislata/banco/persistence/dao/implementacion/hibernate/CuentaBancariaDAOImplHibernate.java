@@ -40,4 +40,20 @@ public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<Cuen
         return cuentasBancarias;
     }
 
+    @Override
+    public CuentaBancaria getByNumeroCuenta(String numeroCuenta) throws BusinessException {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        
+        Query query = session.createQuery("SELECT cuentabancaria FROM CuentaBancaria cuentabancaria WHERE numeroCuenta=?");
+        query.setString(0, numeroCuenta);
+        
+        List<CuentaBancaria> cuentaBancariaList = query.list();
+        CuentaBancaria cuentaBancaria = cuentaBancariaList.get(0);
+        
+        session.getTransaction().commit();
+
+        return cuentaBancaria;
+    }
+
 }

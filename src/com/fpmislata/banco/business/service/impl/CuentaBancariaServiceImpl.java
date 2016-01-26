@@ -90,4 +90,9 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
         return cuentaBancariaDAO.findByUsuario(idUsuario);
     }
 
+    @Override
+    public CuentaBancaria getByNumeroCuenta(String numeroCuenta) throws BusinessException {
+        return cuentaBancariaDAO.getByNumeroCuenta(numeroCuenta);
+    }
+
 }

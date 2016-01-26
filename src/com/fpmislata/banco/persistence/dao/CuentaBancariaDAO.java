@@ -12,4 +12,5 @@ public interface CuentaBancariaDAO extends GenericDAO<CuentaBancaria> {
 
     List<CuentaBancaria> findBySucursal(int idSucursalBancaria) throws BusinessException;
     List<CuentaBancaria> findByUsuario(int idUsuario) throws BusinessException;
+    CuentaBancaria getByNumeroCuenta(String numeroCuenta) throws BusinessException;
 }
