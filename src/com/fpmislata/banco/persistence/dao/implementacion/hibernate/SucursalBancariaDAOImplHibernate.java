@@ -17,8 +17,26 @@ public class SucursalBancariaDAOImplHibernate extends GenericDAOImplHibernate<Su
         Query query = session.createQuery("SELECT sucursalbancaria FROM SucursalBancaria sucursalbancaria WHERE idEntidadBancaria=?");
         query.setInteger(0, idEntidadBancaria);
         List<SucursalBancaria> sucursalesBancarias = query.list();
+        
+        session.getTransaction().commit();
 
         return sucursalesBancarias;
+    }
+
+    @Override
+    public SucursalBancaria getByCodigoSucursal(int codigoSucursal) throws BusinessException {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("SELECT sucursalbancaria FROM SucursalBancaria sucursalbancaria WHERE codigoSucursalBancaria=?");
+        query.setInteger(0, codigoSucursal);
+        List<SucursalBancaria> sucursalesBancarias = query.list();
+        SucursalBancaria sucursalBancaria = sucursalesBancarias.get(0);
+        
+        session.getTransaction().commit();
+        
+        return sucursalBancaria;
+        
     }
 
 }

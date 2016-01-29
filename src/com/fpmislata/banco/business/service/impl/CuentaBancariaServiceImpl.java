@@ -11,6 +11,7 @@ import com.fpmislata.banco.persistence.dao.CuentaBancariaDAO;
 import com.fpmislata.banco.persistence.dao.EntidadBancariaDAO;
 import com.fpmislata.banco.persistence.dao.SucursalBancariaDAO;
 import com.fpmislata.banco.persistence.dao.UsuarioDAO;
+import static java.lang.Integer.parseInt;
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,69 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
     @Override
     public CuentaBancaria getByNumeroCuenta(String numeroCuenta) throws BusinessException {
         return cuentaBancariaDAO.getByNumeroCuenta(numeroCuenta);
+    }
+
+    @Override
+    public CuentaBancaria getByNumeroCuentaFull(String numeroCuentaFull) throws BusinessException {
+        try {
+
+            CuentaBancaria cuentaBancariaFinal = new CuentaBancaria();
+
+            String codigoEntidad = numeroCuentaFull.substring(0, 4);
+            String codigoSucursal = numeroCuentaFull.substring(4, 8);
+            String CDC = numeroCuentaFull.substring(8, 10);
+            String cuenta = numeroCuentaFull.substring(10, 20);
+
+            String calculoCDC = ControlDigitCalculator.calcularDC(codigoEntidad, codigoSucursal, cuenta);
+
+            if (!CDC.equalsIgnoreCase(calculoCDC)) {
+                throw new BusinessException("cdc", "cdc incorrecto");
+            } else {
+                //na
+            }
+            //saco la entidad Bancaria
+            EntidadBancaria entidadBancaria = entidadBancariaDAO.get(parseInt(codigoEntidad));
+
+            //saco la lista de sucursales de la entidad
+            List<SucursalBancaria> listaSucursales = sucursalBancariaDAO.getByEntidad(entidadBancaria.getIdEntidadBancaria());
+
+            for (SucursalBancaria sucursal : listaSucursales) {
+        //recorro la lista de sucursales y si coincide el codigoSucursal con la que tenemos en el numero de cuenta,
+                //saco la lista de cuentas
+
+                if (sucursal.getCodigoSucursalBancaria().equalsIgnoreCase(codigoSucursal)) {
+                    //saco la sucursal segun codigo (este metodo es nuevo de las transacciones)
+                    SucursalBancaria sucursalBancaria = sucursalBancariaDAO.getByCodigoSucursal(parseInt(codigoSucursal));
+
+                    //saco la lista de cuentas con el metodo findBySucursal(necesita como parametro el idSucursal obtenido anteriormente)
+                    List<CuentaBancaria> listaCuentas = cuentaBancariaDAO.findBySucursal(sucursalBancaria.getIdSucursalBancaria());
+
+                    for (CuentaBancaria cuentaBancaria : listaCuentas) {
+
+                        //recorro la lista de cuentas y si coincide con el codigoCuenta, devuelvo finalmente el objeto CuentaBancaria
+                        String cuentaString = String.valueOf(cuentaBancaria.getNumeroCuenta());
+
+                        if (cuenta.equalsIgnoreCase(cuentaString)) {
+
+                            cuentaBancariaFinal = cuentaBancaria;
+
+                            return cuentaBancariaFinal;
+
+                        } else {
+                        }
+                    }
+                } else {
+                }
+            }
+
+            return cuentaBancariaFinal;
+
+        } catch (BusinessException ex) {
+
+            throw new BusinessException("numeroCuenta", "Numero cuenta incorrecto");
+
+        }
+
     }
 
 }
