@@ -22,7 +22,7 @@ public class TransaccionServiceImpl implements TransaccionService {
 
     @Override
     public void insertTransaccion(Transaccion transaccion) throws BusinessException {
-        try{
+        
         //recibiremos el numero completo que contiene codentidad+sucursal+digitoControl+numerocuenta
         //el formato de una cuenta es: 4 + 4 + 2+ 10            
         MovimientoBancario OrigenMovimientoBancario = new MovimientoBancario();
@@ -80,13 +80,7 @@ public class TransaccionServiceImpl implements TransaccionService {
 
         cuentaBancariaService.update(DestinoCuentaBancaria);
 
-        movimientoBancarioService.insert(DestinoMovimientoBancario);
-        
-        }catch(BusinessException ex){
-            
-        throw new BusinessException("transaccion","ha ocurrido un error y no se ha realizado la transaccion");
-        }
-        
+        movimientoBancarioService.insert(DestinoMovimientoBancario);  
 
     }
 

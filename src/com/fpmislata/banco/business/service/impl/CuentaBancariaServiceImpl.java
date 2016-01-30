@@ -98,7 +98,11 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
 
     @Override
     public CuentaBancaria getByNumeroCuentaFull(String numeroCuentaFull) throws BusinessException {
-        try {
+        if (numeroCuentaFull.length() != 20) {
+
+            throw new BusinessException("numeroCuenta", "el numero de cuenta debe de ser de 20 numeros");
+
+        } else {
 
             CuentaBancaria cuentaBancariaFinal = new CuentaBancaria();
 
@@ -112,48 +116,44 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
             if (!CDC.equalsIgnoreCase(calculoCDC)) {
                 throw new BusinessException("cdc", "cdc incorrecto");
             } else {
-                //na
-            }
-            //saco la entidad Bancaria
-            EntidadBancaria entidadBancaria = entidadBancariaDAO.get(parseInt(codigoEntidad));
 
-            //saco la lista de sucursales de la entidad
-            List<SucursalBancaria> listaSucursales = sucursalBancariaDAO.getByEntidad(entidadBancaria.getIdEntidadBancaria());
+                //saco la entidad Bancaria
+                EntidadBancaria entidadBancaria = entidadBancariaDAO.get(parseInt(codigoEntidad));
 
-            for (SucursalBancaria sucursal : listaSucursales) {
-        //recorro la lista de sucursales y si coincide el codigoSucursal con la que tenemos en el numero de cuenta,
-                //saco la lista de cuentas
+                //saco la lista de sucursales de la entidad
+                List<SucursalBancaria> listaSucursales = sucursalBancariaDAO.getByEntidad(entidadBancaria.getIdEntidadBancaria());
 
-                if (sucursal.getCodigoSucursalBancaria().equalsIgnoreCase(codigoSucursal)) {
-                    //saco la sucursal segun codigo (este metodo es nuevo de las transacciones)
-                    SucursalBancaria sucursalBancaria = sucursalBancariaDAO.getByCodigoSucursal(parseInt(codigoSucursal));
+                for (SucursalBancaria sucursal : listaSucursales) {
+                    //recorro la lista de sucursales y si coincide el codigoSucursal con la que tenemos en el numero de cuenta,
+                    //saco la lista de cuentas
 
-                    //saco la lista de cuentas con el metodo findBySucursal(necesita como parametro el idSucursal obtenido anteriormente)
-                    List<CuentaBancaria> listaCuentas = cuentaBancariaDAO.findBySucursal(sucursalBancaria.getIdSucursalBancaria());
+                    if (sucursal.getCodigoSucursalBancaria().equalsIgnoreCase(codigoSucursal)) {
+                        //saco la sucursal segun codigo (este metodo es nuevo de las transacciones)
+                        SucursalBancaria sucursalBancaria = sucursalBancariaDAO.getByCodigoSucursal(parseInt(codigoSucursal));
 
-                    for (CuentaBancaria cuentaBancaria : listaCuentas) {
+                        //saco la lista de cuentas con el metodo findBySucursal(necesita como parametro el idSucursal obtenido anteriormente)
+                        List<CuentaBancaria> listaCuentas = cuentaBancariaDAO.findBySucursal(sucursalBancaria.getIdSucursalBancaria());
 
-                        //recorro la lista de cuentas y si coincide con el codigoCuenta, devuelvo finalmente el objeto CuentaBancaria
-                        String cuentaString = String.valueOf(cuentaBancaria.getNumeroCuenta());
+                        for (CuentaBancaria cuentaBancaria : listaCuentas) {
 
-                        if (cuenta.equalsIgnoreCase(cuentaString)) {
+                            //recorro la lista de cuentas y si coincide con el codigoCuenta, devuelvo finalmente el objeto CuentaBancaria
+                            String cuentaString = String.valueOf(cuentaBancaria.getNumeroCuenta());
 
-                            cuentaBancariaFinal = cuentaBancaria;
+                            if (cuenta.equalsIgnoreCase(cuentaString)) {
 
-                            return cuentaBancariaFinal;
+                                cuentaBancariaFinal = cuentaBancaria;
 
-                        } else {
+                                return cuentaBancariaFinal;
+
+                            } else {
+                            }
                         }
+                    } else {
                     }
-                } else {
                 }
+
+                return cuentaBancariaFinal;
             }
-
-            return cuentaBancariaFinal;
-
-        } catch (BusinessException ex) {
-
-            throw new BusinessException("numeroCuenta", "Numero cuenta incorrecto");
 
         }
 
