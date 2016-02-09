@@ -114,4 +114,54 @@ public class TransaccionServiceImpl implements TransaccionService {
 
     }
 
+    @Override
+    public void retirar(Transaccion transaccion) throws BusinessException {
+        if (transaccion.getPin() != 2045) {
+            throw new BusinessException("Pin", "Código pin Incorrecto.");
+        }
+
+        //CCC (completo)
+        String numeroCuentaCorrienteOrigen = transaccion.getCuentaOrigen();
+        CuentaBancaria cuentaBancaria = cuentaBancariaService.getByNumeroCuentaFull(numeroCuentaCorrienteOrigen);
+
+        if (!cuentaBancaria.getSucursalBancaria().getEntidadBancaria().getCodigoEntidad().equals(numeroCuentaCorrienteOrigen.trim().substring(0, 4))) {
+            throw new BusinessException("Código de Entidad", "Introduzca correctamente en Cuenta Origen.");
+        }
+        if (!cuentaBancaria.getSucursalBancaria().getCodigoSucursalBancaria().equals(numeroCuentaCorrienteOrigen.trim().substring(4, 8))) {
+            throw new BusinessException("Código Sucursal", "Introduzca correctamente en Cuenta Origen.");
+        }
+        if (!cuentaBancaria.getDigitoControl().equals(numeroCuentaCorrienteOrigen.trim().substring(8, 10))) {
+            throw new BusinessException("Digito de Control", "Introduzca correctamente en Cuenta Origen.");
+        }
+        //Número de Cuenta sólo
+        if (!cuentaBancaria.getNumeroCuenta().equals(numeroCuentaCorrienteOrigen.trim().substring(10, 20))) {
+            throw new BusinessException("Número de Cuenta", "Introduzca correctamente en Cuenta Origen.");
+        }
+        
+        MovimientoBancario OrigenMovimientoBancario = new MovimientoBancario(cuentaBancaria, transaccion.getConcepto(), transaccion.getImporte(), new Date());
+        OrigenMovimientoBancario.setTipoMovimiento(RolMovimiento.debe);
+
+        BigDecimal importe = transaccion.getImporte();
+        if (importe == null) {
+            throw new BusinessException("Importe", "Debe indicar un Importe correcto.");
+        } else if (importe.compareTo(BigDecimal.ZERO) < 0) {
+            throw new BusinessException("Importe", "El importe no puede ser negativo.");
+        }
+        BigDecimal OrigenSaldoViejo = cuentaBancaria.getSaldo();
+        OrigenMovimientoBancario.setSaldoAnterior(OrigenSaldoViejo);
+
+        BigDecimal OrigenImporte = importe.multiply(new BigDecimal(-1));
+        BigDecimal OrigenSaldoNuevo = OrigenSaldoViejo.add(OrigenImporte);
+        OrigenMovimientoBancario.setSaldoPosterior(OrigenSaldoNuevo);
+
+        if (OrigenSaldoNuevo.compareTo(BigDecimal.ZERO) > 0) {
+            cuentaBancaria.setSaldo(OrigenSaldoNuevo);
+            cuentaBancariaService.update(cuentaBancaria);
+        } else {
+            throw new BusinessException("Importe", "El importe indicado es superior al actual en la cuenta.");
+        }
+        
+        movimientoBancarioService.insert(OrigenMovimientoBancario);
+    }
+
 }

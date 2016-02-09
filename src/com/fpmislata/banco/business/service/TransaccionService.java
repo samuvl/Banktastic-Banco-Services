@@ -11,5 +11,5 @@ import com.fpmislata.banco.core.BusinessException;
 public interface TransaccionService {
     
     public void insertTransaccion(Transaccion transaccion) throws BusinessException;
-    
+    public void retirar(Transaccion transaccion) throws BusinessException;
 }

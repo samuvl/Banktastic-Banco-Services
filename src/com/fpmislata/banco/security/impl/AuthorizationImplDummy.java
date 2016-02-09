@@ -16,7 +16,7 @@ public class AuthorizationImplDummy implements Authorization {
         boolean isAuthorized;
 
         
-        if (url.equalsIgnoreCase("/banktastic-banco-api/api/session") || url.equalsIgnoreCase("/banktastic-banco-api/api/transaccion")) {
+        if (url.equalsIgnoreCase("/banktastic-banco-api/api/session") || url.equalsIgnoreCase("/banktastic-banco-api/api/transaccion") || url.equalsIgnoreCase("/banktastic-banco-api/api/retirar")) {
             isAuthorized = true;
         } else {
             isAuthorized = false;
