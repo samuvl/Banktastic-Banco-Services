@@ -11,9 +11,10 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
-INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`, `cif`) VALUES ('Santander', '0001', '2010-05-06', 'c/ botin 17', '55555555K');
-INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`, `cif`) VALUES ('Evobank', '0002', '2011-07-08', 'c/ morales 34', '66666666Q');
-INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`, `cif`) VALUES ('Bankia', '0003', '2008-07-08', 'c/ San Antonio 30', '77777777B');
+INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`, `cif`) VALUES ('Santander', '2001', '2010-05-06', 'c/ botin 17', '55555555K');
+INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`, `cif`) VALUES ('Evobank', '2002', '2011-07-08', 'c/ morales 34', '66666666Q');
+INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`, `cif`) VALUES ('Bankia', '2003', '2008-07-08', 'c/ San Antonio 30', '77777777B');
+INSERT INTO `banco`.`entidadbancaria` (`nombre`, `codigoEntidad`, `fechaCreacion`, `direccion`, `cif`) VALUES ('Go-Server', '2000', '2015-02-02', 'C/ DaniTusMueltos', '53258450H');
 
 
 CREATE TABLE IF NOT EXISTS `sucursalbancaria` (
@@ -30,9 +31,10 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
-INSERT INTO `banco`.`sucursalbancaria` (`codigoSucursalBancaria`, `direccion`, `telefono`, `idEntidadBancaria`, `fechaCreacion`) VALUES ('1111', 'C/ Tu Sucursal', '968881144', '1','2010-05-06');
-INSERT INTO `banco`.`sucursalbancaria` (`codigoSucursalBancaria`, `direccion`, `telefono`, `idEntidadBancaria`, `fechaCreacion`) VALUES ('2222', 'C/ Transformerica', '965552244', '2','2013-05-06');
-INSERT INTO `banco`.`sucursalbancaria` (`codigoSucursalBancaria`, `direccion`, `telefono`, `idEntidadBancaria`, `fechaCreacion`) VALUES ('3333', 'C/ Rio Abajo', '961114488', '2','2003-11-01');
+INSERT INTO `banco`.`sucursalbancaria` (`codigoSucursalBancaria`, `direccion`, `telefono`, `idEntidadBancaria`, `fechaCreacion`) VALUES ('2001', 'C/ Tu Sucursal', '968881144', '1','2010-05-06');
+INSERT INTO `banco`.`sucursalbancaria` (`codigoSucursalBancaria`, `direccion`, `telefono`, `idEntidadBancaria`, `fechaCreacion`) VALUES ('2002', 'C/ Transformerica', '965552244', '2','2013-05-06');
+INSERT INTO `banco`.`sucursalbancaria` (`codigoSucursalBancaria`, `direccion`, `telefono`, `idEntidadBancaria`, `fechaCreacion`) VALUES ('2003', 'C/ Rio Abajo', '961114488', '2','2003-11-01');
+INSERT INTO `banco`.`sucursalbancaria` (`codigoSucursalBancaria`, `direccion`, `telefono`, `idEntidadBancaria`, `fechaCreacion`) VALUES ('2000', 'C/ Tus Muelaaas', '961234567', '4','2015-02-02');
 
 
 CREATE TABLE IF NOT EXISTS `usuario` (
@@ -54,6 +56,7 @@ ENGINE=InnoDB
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `encryptedPassword`, `rol`, `nick`, `dni`) VALUES (2, 'cliente', 'cliente@cliente.com', 'oFQrspbsJhva3+HgRI4lXFw+Hv2hHcmT', 'cliente', 'cliente', '33333333P');
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `encryptedPassword`, `rol`, `nick`, `dni`) VALUES (3, 'a', 'a@a.com', 'JVaiKkedo4saW1Jw9IEuCxdBzKc6UFxm', 'trabajador', 'a', '22222222J');
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `encryptedPassword`, `rol`, `nick`, `dni`) VALUES (1, 'trabajador', 'trabajador@trabajador.com', 'fDTIfF8f4BnVkzkcvNdyINBmIXbRRxsJ', 'trabajador', 'trabajador', '11111111H');
+INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `encryptedPassword`, `rol`, `nick`, `dni`) VALUES (4, 'daniel', 'daniel@daniel.com', 'Ks7MIvDG/+LH0cZAoBtKjJ1oXC3NdOpa', 'trabajador', 'daniel', '53258450H');
 
 
 CREATE TABLE IF NOT EXISTS `cuentabancaria` (
@@ -77,6 +80,7 @@ INSERT INTO `cuentabancaria` ( `numeroCuenta`, `digitoControl`, `idUsuario`, `id
 INSERT INTO `cuentabancaria` ( `numeroCuenta`, `digitoControl`, `idUsuario`, `idSucursalBancaria`, `saldo`, `fechaCreacion`) VALUES ("7777222255", 78, 1, 2, 7533.22, '2014-01-10');
 INSERT INTO `cuentabancaria` ( `numeroCuenta`, `digitoControl`, `idUsuario`, `idSucursalBancaria`, `saldo`, `fechaCreacion`) VALUES ("9999999999", 90, 1, 1, 500, '2010-01-10');
 INSERT INTO `cuentabancaria` ( `numeroCuenta`, `digitoControl`, `idUsuario`, `idSucursalBancaria`, `saldo`, `fechaCreacion`) VALUES ("5555555555", 50, 2, 3, 120, '2012-01-10');
+INSERT INTO `cuentabancaria` ( `numeroCuenta`, `digitoControl`, `idUsuario`, `idSucursalBancaria`, `saldo`, `fechaCreacion`) VALUES ("9876543211", 74, 4, 4, 999999.00, '2016-02-02');
 
 
 CREATE TABLE IF NOT EXISTS `movimientobancario` (
@@ -97,4 +101,7 @@ ENGINE=InnoDB
 
 INSERT INTO `banco`.`movimientobancario` VALUES (null, 'debe', 1, 'humbleBundle', '20', 1676, 1656, curdate());
 INSERT INTO `banco`.`movimientobancario` VALUES (null, 'haber', 1, 'empresa', '100', 1656, 1566, curdate());
+
+
+/*Password DanielA1 */
 
