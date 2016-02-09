@@ -98,38 +98,48 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
 
     @Override
     public CuentaBancaria getByNumeroCuentaFull(String numeroCuentaFull) throws BusinessException {
+        CuentaBancaria cuentaBancariaFinal;
+
         if (numeroCuentaFull.length() != 20) {
-
-            throw new BusinessException("numeroCuenta", "el numero de cuenta debe de ser de 20 numeros");
-
+            throw new BusinessException("NumeroCuenta", "Debe de ser de 20 numeros");
         } else {
+            try {
+                cuentaBancariaFinal = cuentaBancariaDAO.getByNumeroCuenta(numeroCuentaFull.substring(10, 20));
+            } catch (IndexOutOfBoundsException e) {
+                throw new BusinessException("NumeroCuenta", "No existe");
+            }
+        }
 
-            CuentaBancaria cuentaBancariaFinal = new CuentaBancaria();
+        return cuentaBancariaFinal;
+    }
+}
 
-            String codigoEntidad = numeroCuentaFull.substring(0, 4);
-            String codigoSucursal = numeroCuentaFull.substring(4, 8);
-            String CDC = numeroCuentaFull.substring(8, 10);
-            String cuenta = numeroCuentaFull.substring(10, 20);
-
-            String calculoCDC = ControlDigitCalculator.calcularDC(codigoEntidad, codigoSucursal, cuenta);
-
-            if (!CDC.equalsIgnoreCase(calculoCDC)) {
-                throw new BusinessException("cdc", "cdc incorrecto");
-            } else {
-
+//                /* Te ahorras todo esto*/ /*
+//            String codigoEntidad = numeroCuentaFull.substring(0, 4);
+//            String codigoSucursal = numeroCuentaFull.substring(4, 8);
+//            String CDC = numeroCuentaFull.substring(8, 10);
+//            String cuenta = numeroCuentaFull.substring(10, 20);
+//
+//            String calculoCDC = ControlDigitCalculator.calcularDC(codigoEntidad, codigoSucursal, cuenta);
+//
+//            if (!CDC.equalsIgnoreCase(calculoCDC)) {
+//                throw new BusinessException("cdc", "cdc incorrecto");
+//            } else {
+/*
                 //saco la entidad Bancaria
-                EntidadBancaria entidadBancaria = entidadBancariaDAO.get(parseInt(codigoEntidad));
+                EntidadBancaria entidadBancaria = entidadBancariaDAO.get(parseInt(numeroCuentaFull.substring(0, 4)));
+                SucursalBancaria sucursalBancaria = sucursalBancariaDAO.getByCodigoSucursal(parseInt(numeroCuentaFull.substring(4, 8)));
+                
 
-                //saco la lista de sucursales de la entidad
                 List<SucursalBancaria> listaSucursales = sucursalBancariaDAO.getByEntidad(entidadBancaria.getIdEntidadBancaria());
 
                 for (SucursalBancaria sucursal : listaSucursales) {
                     //recorro la lista de sucursales y si coincide el codigoSucursal con la que tenemos en el numero de cuenta,
                     //saco la lista de cuentas
 
-                    if (sucursal.getCodigoSucursalBancaria().equalsIgnoreCase(codigoSucursal)) {
+                    if (sucursal.getCodigoSucursalBancaria().equalsIgnoreCase(numeroCuentaFull.substring(4, 8))) {
                         //saco la sucursal segun codigo (este metodo es nuevo de las transacciones)
-                        SucursalBancaria sucursalBancaria = sucursalBancariaDAO.getByCodigoSucursal(parseInt(codigoSucursal));
+                        SucursalBancaria sucursalBancaria = sucursalBancariaDAO.getByCodigoSucursal(parseInt(numeroCuentaFull.substring(4, 8)));
 
                         //saco la lista de cuentas con el metodo findBySucursal(necesita como parametro el idSucursal obtenido anteriormente)
                         List<CuentaBancaria> listaCuentas = cuentaBancariaDAO.findBySucursal(sucursalBancaria.getIdSucursalBancaria());
@@ -139,7 +149,7 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
                             //recorro la lista de cuentas y si coincide con el codigoCuenta, devuelvo finalmente el objeto CuentaBancaria
                             String cuentaString = String.valueOf(cuentaBancaria.getNumeroCuenta());
 
-                            if (cuenta.equalsIgnoreCase(cuentaString)) {
+                            if (numeroCuentaFull.substring(10, 20).equalsIgnoreCase(cuentaString)) {
 
                                 cuentaBancariaFinal = cuentaBancaria;
 
@@ -152,11 +162,9 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
                     }
                 }
 
-                return cuentaBancariaFinal;
+                
             }
 
         }
 
-    }
-
-}
+//    }*/
