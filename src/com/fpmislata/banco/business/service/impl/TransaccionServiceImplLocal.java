@@ -11,6 +11,7 @@ import com.fpmislata.banco.business.service.CuentaBancariaService;
 import com.fpmislata.banco.business.service.MovimientoBancarioService;
 import com.fpmislata.banco.business.service.TransaccionService;
 import com.fpmislata.banco.core.BusinessException;
+import com.fpmislata.banco.core.json.JsonTransformer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,7 +19,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -40,6 +43,9 @@ public class TransaccionServiceImplLocal implements TransaccionService {
     @Autowired
     BancoCentralProvider bancoCentralProvider;
 
+    @Autowired
+    JsonTransformer jsonTransformer;
+
     public BancoCentral getUrlByCCC(BancoCentral bancoCentral) throws BusinessException {
         BancoCentral bancoCentralAnswer = bancoCentralProvider.getBancoCentralAnswer(bancoCentral);
 
@@ -55,69 +61,85 @@ public class TransaccionServiceImplLocal implements TransaccionService {
         // add header
         post.setHeader("User-Agent", USER_AGENT);
 
+        String extraccionJson = jsonTransformer.objectToJson(extraccion);
+        post.setEntity(new StringEntity(extraccionJson));
+        try {
+            HttpResponse response = client.execute(post);
+            System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
 
+            BufferedReader entity = new BufferedReader(
+                    new InputStreamReader(response.getEntity().getContent()));
 
-        post.setEntity(new StringEntity(""));
+            StringBuffer result = new StringBuffer();
+            String line = "";
+            while ((line = entity.readLine()) != null) {
+                result.append(line + entity);
+            }
 
-        HttpResponse response = client.execute(post);
-        System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
+            if (response == HttpStatus.SC_OK) {
 
-        BufferedReader rd = new BufferedReader(
-                new InputStreamReader(response.getEntity().getContent()));
+                method.getResponseBodyAsString();
+            } else {
+                br = new BufferedReader(new InputStreamReader(method.getResponseBodyAsStream()));
+                String readLine;
+                while (((readLine = br.readLine()) != null)) {
+                    System.err.println(readLine);
+                }
+            }
 
-        StringBuffer result = new StringBuffer();
-        String line = "";
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
+        } catch (Exception e) {
+            throw new BusinessException("Retirar", "Error HTTPClient retirando dinero.");
+        } finally {
+            client.getConnectionManager().shutdown();
         }
 
         /*   if (transaccion.getPin() != 2045) {
-            throw new BusinessException("Pin", "Código pin Incorrecto.");
-        }
+         throw new BusinessException("Pin", "Código pin Incorrecto.");
+         }
 
-        //CCC (completo)
-        String numeroCuentaCorrienteOrigen = transaccion.getCuentaOrigen();
-        CuentaBancaria cuentaBancaria = cuentaBancariaService.getByNumeroCuentaFull(numeroCuentaCorrienteOrigen);
+         //CCC (completo)
+         String numeroCuentaCorrienteOrigen = transaccion.getCuentaOrigen();
+         CuentaBancaria cuentaBancaria = cuentaBancariaService.getByNumeroCuentaFull(numeroCuentaCorrienteOrigen);
 
-        if (!cuentaBancaria.getSucursalBancaria().getEntidadBancaria().getCodigoEntidad().equals(numeroCuentaCorrienteOrigen.trim().substring(0, 4))) {
-            throw new BusinessException("Código de Entidad", "Introduzca correctamente en Cuenta Origen.");
-        }
-        if (!cuentaBancaria.getSucursalBancaria().getCodigoSucursalBancaria().equals(numeroCuentaCorrienteOrigen.trim().substring(4, 8))) {
-            throw new BusinessException("Código Sucursal", "Introduzca correctamente en Cuenta Origen.");
-        }
-        if (!cuentaBancaria.getDigitoControl().equals(numeroCuentaCorrienteOrigen.trim().substring(8, 10))) {
-            throw new BusinessException("Digito de Control", "Introduzca correctamente en Cuenta Origen.");
-        }
-        //Número de Cuenta sólo
-        if (!cuentaBancaria.getNumeroCuenta().equals(numeroCuentaCorrienteOrigen.trim().substring(10, 20))) {
-            throw new BusinessException("Número de Cuenta", "Introduzca correctamente en Cuenta Origen.");
-        }
+         if (!cuentaBancaria.getSucursalBancaria().getEntidadBancaria().getCodigoEntidad().equals(numeroCuentaCorrienteOrigen.trim().substring(0, 4))) {
+         throw new BusinessException("Código de Entidad", "Introduzca correctamente en Cuenta Origen.");
+         }
+         if (!cuentaBancaria.getSucursalBancaria().getCodigoSucursalBancaria().equals(numeroCuentaCorrienteOrigen.trim().substring(4, 8))) {
+         throw new BusinessException("Código Sucursal", "Introduzca correctamente en Cuenta Origen.");
+         }
+         if (!cuentaBancaria.getDigitoControl().equals(numeroCuentaCorrienteOrigen.trim().substring(8, 10))) {
+         throw new BusinessException("Digito de Control", "Introduzca correctamente en Cuenta Origen.");
+         }
+         //Número de Cuenta sólo
+         if (!cuentaBancaria.getNumeroCuenta().equals(numeroCuentaCorrienteOrigen.trim().substring(10, 20))) {
+         throw new BusinessException("Número de Cuenta", "Introduzca correctamente en Cuenta Origen.");
+         }
         
-        MovimientoBancario OrigenMovimientoBancario = new MovimientoBancario(cuentaBancaria, transaccion.getConcepto(), transaccion.getImporte(), new Date());
-        OrigenMovimientoBancario.setTipoMovimiento(RolMovimiento.debe);
+         MovimientoBancario OrigenMovimientoBancario = new MovimientoBancario(cuentaBancaria, transaccion.getConcepto(), transaccion.getImporte(), new Date());
+         OrigenMovimientoBancario.setTipoMovimiento(RolMovimiento.debe);
 
-        BigDecimal importe = transaccion.getImporte();
-        if (importe == null) {
-            throw new BusinessException("Importe", "Debe indicar un Importe correcto.");
-        } else if (importe.compareTo(BigDecimal.ZERO) < 0) {
-            throw new BusinessException("Importe", "El importe no puede ser negativo.");
-        }
-        BigDecimal OrigenSaldoViejo = cuentaBancaria.getSaldo();
-        OrigenMovimientoBancario.setSaldoAnterior(OrigenSaldoViejo);
+         BigDecimal importe = transaccion.getImporte();
+         if (importe == null) {
+         throw new BusinessException("Importe", "Debe indicar un Importe correcto.");
+         } else if (importe.compareTo(BigDecimal.ZERO) < 0) {
+         throw new BusinessException("Importe", "El importe no puede ser negativo.");
+         }
+         BigDecimal OrigenSaldoViejo = cuentaBancaria.getSaldo();
+         OrigenMovimientoBancario.setSaldoAnterior(OrigenSaldoViejo);
 
-        BigDecimal OrigenImporte = importe.multiply(new BigDecimal(-1));
-        BigDecimal OrigenSaldoNuevo = OrigenSaldoViejo.add(OrigenImporte);
-        OrigenMovimientoBancario.setSaldoPosterior(OrigenSaldoNuevo);
+         BigDecimal OrigenImporte = importe.multiply(new BigDecimal(-1));
+         BigDecimal OrigenSaldoNuevo = OrigenSaldoViejo.add(OrigenImporte);
+         OrigenMovimientoBancario.setSaldoPosterior(OrigenSaldoNuevo);
 
-        if (OrigenSaldoNuevo.compareTo(BigDecimal.ZERO) > 0) {
-            cuentaBancaria.setSaldo(OrigenSaldoNuevo);
-            cuentaBancariaService.update(cuentaBancaria);
-        } else {
-            throw new BusinessException("Importe", "El importe indicado es superior al actual en la cuenta.");
-        }
+         if (OrigenSaldoNuevo.compareTo(BigDecimal.ZERO) > 0) {
+         cuentaBancaria.setSaldo(OrigenSaldoNuevo);
+         cuentaBancariaService.update(cuentaBancaria);
+         } else {
+         throw new BusinessException("Importe", "El importe indicado es superior al actual en la cuenta.");
+         }
         
-        movimientoBancarioService.insert(OrigenMovimientoBancario);
-    }*/
+         movimientoBancarioService.insert(OrigenMovimientoBancario);
+         }*/
     }
 
     public void movimientoHaber(String concepto, String ccc, BigDecimal importe) throws BusinessException {
@@ -177,6 +199,11 @@ public class TransaccionServiceImplLocal implements TransaccionService {
 
         this.movimientoHaber(transaccion.getConcepto(), transaccion.getCuentaDestino(), transaccion.getImporte());
 
+    }
+
+    @Override
+    public void movimientoRetirar(Transaccion transaccion) throws BusinessException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
