@@ -6,6 +6,5 @@ import com.fpmislata.banco.core.BusinessException;
 
 
 public interface BancoCentralProvider {
-     public String getUrlByEntidad(BancoCentral bancoCentral) throws BusinessException;
-     public String getUrlByGerman() throws BusinessException;
+     public BancoCentral getBancoCentralAnswer(BancoCentral bancoCentral) throws BusinessException;
 }

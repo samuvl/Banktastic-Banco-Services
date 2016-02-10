@@ -7,32 +7,64 @@ import com.fpmislata.banco.core.BusinessException;
 public class BancoCentralProviderImplManual implements BancoCentralProvider {
 
     @Override
-    public String getUrlByEntidad(BancoCentral bancoCentral) throws BusinessException {
-        String urlParaRetirar;
-        if (bancoCentral.getPin() != 1234) {
-            throw new BusinessException("Pin", "Código pin Incorrecto.");
-        }
+    public BancoCentral getBancoCentralAnswer(BancoCentral bancoCentral) throws BusinessException {
+        BancoCentral bancoCentralDevuelto = null;
 
-        int codigoEntidadBancaria = Integer.parseInt(bancoCentral.getCodigoCuentaCorriente().substring(0, 4));
-
-        if (codigoEntidadBancaria < 0 && codigoEntidadBancaria < 999) {
-            urlParaRetirar = "http://banco-GERMAN.rhcloud.com/retirar";
-
-        } else if (codigoEntidadBancaria > 1000 && codigoEntidadBancaria < 1999) {
-            urlParaRetirar = "http://banco-ajanicorp.rhcloud.com/retirar";
-
-        } else if (codigoEntidadBancaria > 2000 && codigoEntidadBancaria < 2999) {
-            urlParaRetirar = "http://banco-samuvl.rhcloud.com/banktastic-banco-api/api/retirar";
-
+        int codigoEntidadCuentaCorriente = Integer.parseInt(bancoCentral.getCodigoCuentaCorriente().substring(0, 4));
+        int codigoEntidadBancariaComprobar = Integer.parseInt(bancoCentral.getCodigoEntidadBancaria());
+/*
+        if ((codigoEntidadBancariaComprobar < 0 && codigoEntidadBancariaComprobar < 999) && bancoCentral.getPin().equals(1111)) {
+            if (codigoEntidadCuentaCorriente > 0 && codigoEntidadCuentaCorriente < 999) {
+                bancoCentralDevuelto.setUrl("http://banco-GERMAN.rhcloud.com/retirar");
+                bancoCentralDevuelto.setPin("1111");
+            } else if (codigoEntidadCuentaCorriente > 1000 && codigoEntidadCuentaCorriente < 1999) {
+                bancoCentralDevuelto.setUrl("http://ecobanco-juankza.rhcloud.com/api/retirar");
+                bancoCentralDevuelto.setPin("2222");
+            } else if (codigoEntidadCuentaCorriente > 2000 && codigoEntidadCuentaCorriente < 2999) {
+                bancoCentralDevuelto.setUrl("http://banco-samuvl.rhcloud.com/banktastic-banco-api/api/retirar");
+                bancoCentralDevuelto.setPin("2045");
+            } else {
+                throw new BusinessException("Entidad Bancaria", "Ha introducido una entidad internacional y no trabajamos con ellas.");
+            }
         } else {
-            throw new BusinessException("Entidad Bancaria", "Ha introducido una entidad internacional y no trabajamos con ellas.");
+            throw new BusinessException("Pin", "Ha introducido un pin incorrecto.");
         }
-        return urlParaRetirar;
-    }
 
-    @Override
-    public String getUrlByGerman() throws BusinessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if ((codigoEntidadBancariaComprobar > 1000 && codigoEntidadBancariaComprobar < 1999) && bancoCentral.getPin().equals(2222)) {
+           if (codigoEntidadCuentaCorriente > 0 && codigoEntidadCuentaCorriente < 999) {
+                bancoCentralDevuelto.setUrl("http://banco-GERMAN.rhcloud.com/retirar");
+                bancoCentralDevuelto.setPin("1111");
+            } else if (codigoEntidadCuentaCorriente > 1000 && codigoEntidadCuentaCorriente < 1999) {
+                bancoCentralDevuelto.setUrl("http://ecobanco-juankza.rhcloud.com/api/retirar");
+                bancoCentralDevuelto.setPin("2222");
+            } else if (codigoEntidadCuentaCorriente > 2000 && codigoEntidadCuentaCorriente < 2999) {
+                bancoCentralDevuelto.setUrl("http://banco-samuvl.rhcloud.com/banktastic-banco-api/api/retirar");
+                bancoCentralDevuelto.setPin("2045");
+            } else {
+                throw new BusinessException("Entidad Bancaria", "Ha introducido una entidad internacional y no trabajamos con ellas.");
+            }
+        } else {
+            throw new BusinessException("Pin", "Ha introducido un pin incorrecto.");
+        }
+*/
+        if ((codigoEntidadBancariaComprobar > 2000 && codigoEntidadBancariaComprobar < 2999) && bancoCentral.getPin().equals(3333)) {
+            if (codigoEntidadCuentaCorriente > 0 && codigoEntidadCuentaCorriente < 999) {
+                bancoCentralDevuelto.setUrl("http://banco-GERMAN.rhcloud.com/retirar");
+                bancoCentralDevuelto.setPin("1111");
+            } else if (codigoEntidadCuentaCorriente > 1000 && codigoEntidadCuentaCorriente < 1999) {
+                bancoCentralDevuelto.setUrl("http://ecobanco-juankza.rhcloud.com/api/retirar");
+                bancoCentralDevuelto.setPin("2222");
+            } else if (codigoEntidadCuentaCorriente > 2000 && codigoEntidadCuentaCorriente < 2999) {
+                bancoCentralDevuelto.setUrl("http://banco-samuvl.rhcloud.com/banktastic-banco-api/api/retirar");
+                bancoCentralDevuelto.setPin("2045");
+            } else {
+                throw new BusinessException("Entidad Bancaria", "Ha introducido una entidad internacional y no trabajamos con ellas.");
+            }
+        } else {
+            throw new BusinessException("Pin", "Ha introducido un pin incorrecto.");
+        }
+
+        return bancoCentralDevuelto;
     }
 
 }

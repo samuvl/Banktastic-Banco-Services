@@ -14,12 +14,12 @@ public class Transaccion implements Serializable{
     private String cuentaDestino;
     private String concepto;
     private BigDecimal importe;
-    private int pin;
+    private String pin;
 
     public Transaccion() {
     }
 
-    public Transaccion(String cuentaOrigen, String cuentaDestino, String concepto, BigDecimal importe, int pin) {
+    public Transaccion(String cuentaOrigen, String cuentaDestino, String concepto, BigDecimal importe, String pin) {
         
         this.cuentaOrigen = cuentaOrigen;
         this.cuentaDestino = cuentaDestino;
@@ -68,11 +68,11 @@ public class Transaccion implements Serializable{
         this.importe = importe;
     }
 
-    public int getPin() {
+    public String getPin() {
         return pin;
     }
 
-    public void setPin(int pin) {
+    public void setPin(String pin) {
         this.pin = pin;
     }
     

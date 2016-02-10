@@ -15,4 +15,6 @@
     <bean class="com.fpmislata.banco.security.impl.AuthorizationImplDummy" />
     <!--<bean class="com.fpmislata.banco.security.impl.CheckManagerImpl" />-->
     
+    <bean class="com.fpmislata.banco.core.json.implementacion.JsonTransformerImplJackson" />
+
 </beans>

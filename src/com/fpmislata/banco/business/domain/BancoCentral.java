@@ -6,11 +6,14 @@ import java.io.Serializable;
 
 public class BancoCentral implements Serializable{
     private String codigoCuentaCorriente;
-    private int pin;
-
-    public BancoCentral(String codigoCuentaCorriente, int pin) {
+    private String pin;
+    private String codigoEntidadBancaria;
+    private String url;
+    
+    public BancoCentral(String codigoCuentaCorriente, String pin, String codigoEntidadBancaria) {
         this.codigoCuentaCorriente = codigoCuentaCorriente;
         this.pin = pin;
+        this.codigoEntidadBancaria = codigoEntidadBancaria;
     }
 
     public String getCodigoCuentaCorriente() {
@@ -21,12 +24,28 @@ public class BancoCentral implements Serializable{
         this.codigoCuentaCorriente = codigoCuentaCorriente;
     }
 
-    public int getPin() {
+    public String getPin() {
         return pin;
     }
 
-    public void setPin(int pin) {
+    public void setPin(String pin) {
         this.pin = pin;
+    }
+
+    public String getCodigoEntidadBancaria() {
+        return codigoEntidadBancaria;
+    }
+
+    public void setCodigoEntidadBancaria(String codigoEntidadBancaria) {
+        this.codigoEntidadBancaria = codigoEntidadBancaria;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
     
     

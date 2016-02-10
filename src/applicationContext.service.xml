@@ -15,5 +15,6 @@
     <bean class="com.fpmislata.banco.business.service.impl.MovimientoBancarioServiceImpl" />
     <bean class="com.fpmislata.banco.business.service.impl.SucursalBancariaServiceImpl" />
     <bean class="com.fpmislata.banco.business.service.impl.TransaccionServiceImpl" />
+    <bean class="com.fpmislata.banco.business.service.impl.BancoCentralProviderImplManual" />
     
 </beans> 
