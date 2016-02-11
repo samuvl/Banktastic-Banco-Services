@@ -1,14 +1,19 @@
 
 package com.fpmislata.banco.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BancoCentral implements Serializable{
     private String codigoCuentaCorriente;
     private String pin;
     private String codigoEntidadBancaria;
     private String url;
+    
+    public BancoCentral(){
+        
+    }
     
     public BancoCentral(String codigoCuentaCorriente, String pin, String codigoEntidadBancaria) {
         this.codigoCuentaCorriente = codigoCuentaCorriente;

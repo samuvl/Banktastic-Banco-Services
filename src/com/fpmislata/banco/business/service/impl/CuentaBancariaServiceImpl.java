@@ -109,7 +109,6 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
                 throw new BusinessException("NumeroCuenta", "No existe");
             }
         }
-
         return cuentaBancariaFinal;
     }
 }
