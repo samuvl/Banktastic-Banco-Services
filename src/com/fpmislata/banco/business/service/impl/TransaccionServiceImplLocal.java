@@ -135,9 +135,5 @@ public class TransaccionServiceImplLocal implements TransaccionService {
         retirarService.retirar(extraccion);
     }
 
-    @Override
-    public void movimientoRetirar(Transaccion transaccion) throws BusinessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

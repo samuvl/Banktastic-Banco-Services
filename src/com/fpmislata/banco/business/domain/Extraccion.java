@@ -10,6 +10,9 @@ public class Extraccion implements Serializable {
     private String token;
     private String concepto;
 
+    public Extraccion() {
+    }
+
     public Extraccion(String codigoCuentaCorriente, BigDecimal importe, String token, String concepto) {
         this.codigoCuentaCorriente = codigoCuentaCorriente;
         this.importe = importe;
