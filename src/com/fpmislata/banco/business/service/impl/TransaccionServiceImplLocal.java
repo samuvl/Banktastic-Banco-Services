@@ -42,7 +42,7 @@ public class TransaccionServiceImplLocal implements TransaccionService {
         BancoCentral bancoCentralAnswer = bancoCentralProvider.getBancoCentralAnswer(bancoCentral);
 
         String bancoCentralJsonTransformer = jsonTransformer.objectToJson(bancoCentralAnswer);
-
+        System.out.println(bancoCentralJsonTransformer);
         return bancoCentralJsonTransformer;
     }
 
