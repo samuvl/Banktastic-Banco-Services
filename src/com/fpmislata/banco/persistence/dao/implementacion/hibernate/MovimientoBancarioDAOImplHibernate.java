@@ -23,7 +23,8 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
         query.setInteger(0, cuentaBancaria.getIdCuentaBancaria());
 
         List<MovimientoBancario> movimientosBancarios = query.list();
-
+        session.getTransaction().commit();
+        
         return movimientosBancarios;
     }
 
