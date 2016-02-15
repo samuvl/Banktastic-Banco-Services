@@ -131,8 +131,6 @@ public class TransaccionServiceImplLocal implements TransaccionService {
         }
 
         this.movimientoHaber(transaccion.getConcepto(), transaccion.getCuentaDestino(), transaccion.getImporte());
-
-        retirarService.retirar(extraccion);
     }
 
 
