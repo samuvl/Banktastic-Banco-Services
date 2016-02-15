@@ -2,11 +2,13 @@
 
 package com.fpmislata.banco.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 //faltan las propiedades de hibernate
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Transaccion implements Serializable{
     
     private int idTransaccion;

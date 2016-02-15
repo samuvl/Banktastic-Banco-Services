@@ -1,8 +1,10 @@
 package com.fpmislata.banco.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Extraccion implements Serializable {
 
     private String codigoCuentaCorriente;
