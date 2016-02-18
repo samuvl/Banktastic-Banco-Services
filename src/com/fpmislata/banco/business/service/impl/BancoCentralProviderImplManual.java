@@ -19,7 +19,7 @@ public class BancoCentralProviderImplManual implements BancoCentralProvider {
         if (codigoEntidadBancariaComprobar >= 0 && codigoEntidadBancariaComprobar <= 999 && bancoCentral.getPin().equalsIgnoreCase("0000")) {
             System.out.println("grupo 1");
             if (codigoEntidadCuentaCorriente >= 0 && codigoEntidadCuentaCorriente <= 999) {
-                bancoCentralDevuelto.setUrl("http://banco-GERMAN.rhcloud.com/retirar");
+                bancoCentralDevuelto.setUrl("http://banco-pedrodelbarrio.rhcloud.com/banco_api/api/retirar");
                 bancoCentralDevuelto.setPin("0000");
             } else if (codigoEntidadCuentaCorriente >= 1000 && codigoEntidadCuentaCorriente <= 1999) {
                 bancoCentralDevuelto.setUrl("http://ecobanco-juankza.rhcloud.com/api/retirar");
@@ -34,7 +34,7 @@ public class BancoCentralProviderImplManual implements BancoCentralProvider {
         } else if (codigoEntidadBancariaComprobar >= 1000 && codigoEntidadBancariaComprobar <= 1999 && bancoCentral.getPin().equalsIgnoreCase("1111")) {
             System.out.println("grupo 2");
             if (codigoEntidadCuentaCorriente >= 0 && codigoEntidadCuentaCorriente <= 999) {
-                bancoCentralDevuelto.setUrl("http://banco-GERMAN.rhcloud.com/retirar");
+                bancoCentralDevuelto.setUrl("http://banco-pedrodelbarrio.rhcloud.com/banco_api/api/retirar");
                 bancoCentralDevuelto.setPin("0000");
             } else if (codigoEntidadCuentaCorriente >= 1000 && codigoEntidadCuentaCorriente <= 1999) {
                 bancoCentralDevuelto.setUrl("http://ecobanco-juankza.rhcloud.com/api/retirar");
@@ -49,8 +49,8 @@ public class BancoCentralProviderImplManual implements BancoCentralProvider {
         } else if (codigoEntidadBancariaComprobar >= 2000 && codigoEntidadBancariaComprobar <= 2999 && bancoCentral.getPin().equalsIgnoreCase("2045")) {
             System.out.println("grupo 3");
             if (codigoEntidadCuentaCorriente >= 0 && codigoEntidadCuentaCorriente <= 999) {
-                bancoCentralDevuelto.setUrl("http://banco-GERMAN.rhcloud.com/retirar");
-                bancoCentralDevuelto.setPin("1111");
+                bancoCentralDevuelto.setUrl("http://banco-pedrodelbarrio.rhcloud.com/banco_api/api/retirar");
+                bancoCentralDevuelto.setPin("0000");
             } else if (codigoEntidadCuentaCorriente >= 1000 && codigoEntidadCuentaCorriente <= 1999) {
                 bancoCentralDevuelto.setUrl("http://ecobanco-vicentedaw2.rhcloud.com/api/retirar");
                 bancoCentralDevuelto.setPin("1111");
