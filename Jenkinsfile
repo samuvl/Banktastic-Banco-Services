@@ -17,7 +17,7 @@ pipeline {
             steps {
                 sh 'printenv'
             }
-        }
+     }
      stage('Example') {
             options {
                 timeout(time: 1, unit: 'SECONDS') 
@@ -26,11 +26,11 @@ pipeline {
                 sleep 10
                 echo 'options_timeout_1_seconds'
             }
-        }
+    }
     post {
-      always{
-        echo 'Always do a post'
-      }
-      {
+        always{
+          echo 'Always do a post'
+        }
+    {
   }
 }
