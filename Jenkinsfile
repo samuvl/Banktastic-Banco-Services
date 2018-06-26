@@ -13,6 +13,15 @@ pipeline {
       }
     }
   }
+  stage('TimeoutStage') {
+                options {
+                    timeout(time: 1, unit: 'SECONDS') 
+                }
+                steps {
+                    sleep 4
+                    echo 'options_timeout_1_seconds'
+                }
+        }
   post {
     always {
       echo 'Always do a post'
