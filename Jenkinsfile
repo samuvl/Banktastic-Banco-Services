@@ -1,20 +1,10 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
-      parallel {
-        stage('Build') {
-          steps {
-            sleep 10
-            timestamps()
-          }
-        }
-        stage('Build_2') {
-          steps {
-            bat(script: 'scriptA', returnStatus: true)
-            fileExists 'a.txt'
-          }
-        }
+    stage('Stage1') {
+      steps {
+        sleep 10
+        sh 'echo \'Step 1. Hello World!\''
       }
     }
   }
