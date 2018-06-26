@@ -32,15 +32,14 @@ pipeline {
         echo "Hello, ${PERSON}, nice to meet you."
       }
     }
-    
     stage('When') {
-            when {
-                branch 'master'
-            }
-            steps {
-                echo 'you are in master bb'
-            }
-        }
+      when {
+        branch 'master'
+      }
+      steps {
+        echo 'you are in master bb'
+      }
+    }
   }
   post {
     always {
