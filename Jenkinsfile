@@ -3,7 +3,7 @@ pipeline {
   stages {
         stage('Stage1') {
           steps {
-            sleep 10
+            sleep 3
             echo 'Step 1. Hello World!'
           }
         }
@@ -12,7 +12,7 @@ pipeline {
                     timeout(time: 1, unit: 'SECONDS') 
                 }
                 steps {
-                    sleep 10
+                    sleep 4
                     echo 'options_timeout_1_seconds'
                 }
         }
