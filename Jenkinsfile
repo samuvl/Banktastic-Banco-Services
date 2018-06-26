@@ -51,7 +51,7 @@ pipeline {
             steps {
                 echo 'branch name may be: master or staging. Environment name ...'
             }
-    
+    }
   }
   post {
     always {
