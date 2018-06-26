@@ -34,6 +34,6 @@ pipeline {
     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
   }
   triggers {
-    cron('H 12 * * * *')
+    cron('H 13 * * *')
   }
 }
