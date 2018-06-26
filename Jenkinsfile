@@ -15,7 +15,7 @@ pipeline {
     stage('TimeoutStage') {
       agent any
       options {
-        timeout(time: 1, unit: 'SECONDS')
+        timeout(time: 2, unit: 'SECONDS')
       }
       steps {
         sleep 1
