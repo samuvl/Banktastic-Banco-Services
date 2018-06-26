@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  parameters {
+    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+  }
   stages {
         stage('Stage1') {
           steps {
@@ -7,14 +10,10 @@ pipeline {
             echo 'Step 1. Hello World!'
           }
         }
-         stage('Example') {
-                options {
-                    timeout(time: 1, unit: 'SECONDS') 
-                }
-                steps {
-                    sleep 4
-                    echo 'options_timeout_1_seconds'
-                }
+        stage('Parameters') {
+            steps {
+                echo "Hello ${params.PERSON}"
+            }
         }
   }
   post {
