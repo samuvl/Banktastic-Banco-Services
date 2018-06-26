@@ -40,6 +40,18 @@ pipeline {
         echo 'you are in master bb'
       }
     }
+    stage('when branch name') {
+            when {
+                expression { BRANCH_NAME ==~ /(master|staging)/ }
+                anyOf {
+                    environment name: 'DEPLOY_TO', value: 'master'
+                    environment name: 'DEPLOY_TO', value: 'staging'
+                }
+            }
+            steps {
+                echo 'branch name may be: master or staging. Environment name ...'
+            }
+    
   }
   post {
     always {
