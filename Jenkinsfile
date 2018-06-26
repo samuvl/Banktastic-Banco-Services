@@ -22,17 +22,16 @@ pipeline {
         echo 'options_timeout_1_seconds'
       }
     }
-    
     stage('Input') {
-            input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                submitter "alice,bob"
-            }
-            steps {
-                echo "Hello, ${PERSON}, nice to meet you."
-            }
-        }
+      input {
+        message 'Should we continue?'
+        id 'Yes, we should.'
+        submitter 'alice,bob'
+      }
+      steps {
+        echo "Hello, ${PERSON}, nice to meet you."
+      }
+    }
   }
   post {
     always {
