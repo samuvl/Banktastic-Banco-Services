@@ -4,8 +4,13 @@ pipeline {
     stage('Stage1') {
       steps {
         sleep 10
-        sh 'echo \'Step 1. Hello World!\''
+        echo 'Step 1. Hello World!'
       }
     }
+    post {
+      always{
+        echo 'Always do a post'
+      }
+      {
   }
 }
