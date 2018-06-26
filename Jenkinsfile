@@ -13,11 +13,12 @@ pipeline {
       }
     }
     stage('TimeoutStage') {
+      agent any
       options {
         timeout(time: 1, unit: 'SECONDS')
       }
       steps {
-        sleep 4
+        sleep 1
         echo 'options_timeout_1_seconds'
       }
     }
