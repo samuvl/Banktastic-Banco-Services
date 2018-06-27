@@ -22,16 +22,7 @@ pipeline {
         echo 'options_timeout_1_seconds'
       }
     }
-    stage('Input') {
-      input {
-        message 'Should we continue?'
-        id 'Yes, we should.'
-        submitter 'admin'
-      }
-      steps {
-        echo "Hello, ${PERSON}, nice to meet you."
-      }
-    }
+   
     stage('When') {
       when {
         branch 'master'
